@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  sutpc-data-netcar-gps-sutpc-file:
+    image: nexus.sutpc.cc:9091/sutpc-data-netcar-gps-sutpc-file:latest
+    container_name: sutpc-data-netcar-gps-sutpc-file
+    volumes:
+      - "/opt/deploys/sutpc-data-netcar-gps-sutpc-file/data:/opt/netcargps/data"
+    networks:
+      - sutpc-bus-network
+networks:
+  sutpc-bus-network:
+    external: true

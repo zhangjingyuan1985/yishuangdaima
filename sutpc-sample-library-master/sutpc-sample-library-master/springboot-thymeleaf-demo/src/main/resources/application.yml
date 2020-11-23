@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: springboot-thymeleaf-demo
+
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+  thymeleaf:
+    cache: false
+    encoding: utf-8
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+
+server:
+  port: 8082
+  session:
+    timeout: 30
+ 
+# sql日志输出
+logging:
+    level:
+      com.sutpc.its.dao: DEBUG

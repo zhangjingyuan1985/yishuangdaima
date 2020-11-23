@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: kafka-websocket
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+  kafka:
+    consumer:
+      bootstrap-servers: 172.0.7.104:9092,172.0.7.105:9092,172.0.7.106:9092
+      group-id: sutpc-kafka-websocket-ftc
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      default-topic: com.sutpc.its.ftc.videoai.normal
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+# spring cloud access&secret config
+# 可以访问如下地址查看: https://usercenter.console.aliyun.com/#/manage/ak
+alibaba:
+  cloud:
+    access-key: hello
+    secret-key: world
+
+server:
+  port: 8080

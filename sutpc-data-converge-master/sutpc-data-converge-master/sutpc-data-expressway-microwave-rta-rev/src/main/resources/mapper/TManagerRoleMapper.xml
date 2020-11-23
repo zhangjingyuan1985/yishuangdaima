@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.expressway.microwave.rta.mapper.TManagerRoleMapper">
+    <resultMap id="BaseResultMap" type="com.sutpc.data.rev.expressway.microwave.rta.entity.TManagerRole">
+        <id column="ID" jdbcType="BIGINT" property="id"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="MANAGER_ID" jdbcType="BIGINT" property="managerId"/>
+        <result column="ROLE_ID" jdbcType="BIGINT" property="roleId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, CREATE_TIME, MANAGER_ID, ROLE_ID
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_manager_role
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from HIGHWAY.T_MANAGER_ROLE
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from t_manager_role
+        where ID = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TManagerRole">
+        insert into t_manager_role (ID, CREATE_TIME, MANAGER_ID,
+                                    ROLE_ID)
+        values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{managerId,jdbcType=BIGINT},
+                #{roleId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TManagerRole">
+        insert into t_manager_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="managerId != null">
+                MANAGER_ID,
+            </if>
+            <if test="roleId != null">
+                ROLE_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="managerId != null">
+                #{managerId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TManagerRole">
+        update t_manager_role
+        <set>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="managerId != null">
+                MANAGER_ID = #{managerId,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                ROLE_ID = #{roleId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TManagerRole">
+        update t_manager_role
+        set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            MANAGER_ID  = #{managerId,jdbcType=BIGINT},
+            ROLE_ID     = #{roleId,jdbcType=BIGINT}
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

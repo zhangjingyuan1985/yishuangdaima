@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/v1/master.xml
+      relativeToChangelogFile: false
+  - include:
+      file: classpath:db/changelog/init-data.xml
+      relativeToChangelogFile: false
+      context: load

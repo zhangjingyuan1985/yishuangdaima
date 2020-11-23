@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.sutpc.data.util</groupId>
+    <artifactId>sutpc-data-util-converge</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>sutpc-data-util-kafka-huawei</artifactId>
+  <packaging>jar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>com.sutpc</groupId>
+      <artifactId>framework-utils</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!--这个包是本地lib文件目录中的包-->
+    <!--mvn install:install-file -Dfile=${basedir}\lib\kafka-clients-0.11.0.1.jar -DgroupId=kafka-clients -DartifactId=kafka-clients -Dversion=0.11.0.1 -Dpackaging=jar-->
+    <dependency>
+      <groupId>kafka-clients</groupId>
+      <artifactId>kafka-clients</artifactId>
+      <version>0.11.0.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/kafka-clients-0.11.0.1.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.25</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+      <scope>compile</scope>
+    </dependency>
+    <!-- end -->
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

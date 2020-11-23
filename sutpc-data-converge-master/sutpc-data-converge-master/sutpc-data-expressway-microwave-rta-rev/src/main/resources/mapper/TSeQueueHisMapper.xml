@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.expressway.microwave.rta.mapper.TSeQueueHisMapper">
+    <resultMap id="BaseResultMap" type="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeQueueHis">
+        <id column="INTERSECTIONCODE" jdbcType="VARCHAR" property="intersectioncode"/>
+        <result column="OPENGATENUM" jdbcType="BIGINT" property="opengatenum"/>
+        <result column="QUEUELENGTH" jdbcType="DOUBLE" property="queuelength"/>
+        <result column="RECORDTIME" jdbcType="TIMESTAMP" property="recordtime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        INTERSECTIONCODE, OPENGATENUM, QUEUELENGTH, RECORDTIME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_se_queue_his
+        where INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from HIGHWAY.T_SE_QUEUE_HIS
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from t_se_queue_his
+        where INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeQueueHis">
+        insert into t_se_queue_his (INTERSECTIONCODE, OPENGATENUM, QUEUELENGTH,
+                                    RECORDTIME)
+        values (#{intersectioncode,jdbcType=VARCHAR}, #{opengatenum,jdbcType=BIGINT}, #{queuelength,jdbcType=DOUBLE},
+                #{recordtime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeQueueHis">
+        insert into t_se_queue_his
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="intersectioncode != null">
+                INTERSECTIONCODE,
+            </if>
+            <if test="opengatenum != null">
+                OPENGATENUM,
+            </if>
+            <if test="queuelength != null">
+                QUEUELENGTH,
+            </if>
+            <if test="recordtime != null">
+                RECORDTIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="intersectioncode != null">
+                #{intersectioncode,jdbcType=VARCHAR},
+            </if>
+            <if test="opengatenum != null">
+                #{opengatenum,jdbcType=BIGINT},
+            </if>
+            <if test="queuelength != null">
+                #{queuelength,jdbcType=DOUBLE},
+            </if>
+            <if test="recordtime != null">
+                #{recordtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeQueueHis">
+        update t_se_queue_his
+        <set>
+            <if test="opengatenum != null">
+                OPENGATENUM = #{opengatenum,jdbcType=BIGINT},
+            </if>
+            <if test="queuelength != null">
+                QUEUELENGTH = #{queuelength,jdbcType=DOUBLE},
+            </if>
+            <if test="recordtime != null">
+                RECORDTIME = #{recordtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeQueueHis">
+        update t_se_queue_his
+        set OPENGATENUM = #{opengatenum,jdbcType=BIGINT},
+            QUEUELENGTH = #{queuelength,jdbcType=DOUBLE},
+            RECORDTIME  = #{recordtime,jdbcType=TIMESTAMP}
+        where INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+    </update>
+</mapper>

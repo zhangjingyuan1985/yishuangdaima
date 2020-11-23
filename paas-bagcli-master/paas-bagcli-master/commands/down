@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -e
+. "$BAGCLI_WORKDIR/common"
+
+cli_help_down() {
+  echo "
+Command: down
+
+Usage: 
+  down project_name"
+  exit 1
+}
+
+[ ! -n "$1" ] && cli_help_down
+
+export BAGCLI_PROJECT_NAME=$1
+
+cli_log "Down BEGIN"
+
+cli_log "ENV variables"
+env | grep "BAGCLI_*"
+
+cli_log "Executing docker-compose down ..."
+
+docker-compose -f $BAGCLI_PROJECTS_PATH/$BAGCLI_PROJECT_NAME/docker-compose.yml down
+
+cli_log "Down END"

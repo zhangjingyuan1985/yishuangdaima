@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.transport.rta.mapper.EventInfoMapper">
+
+  <insert id="insert" parameterType="java.util.List">
+    insert into t_event_report_basic
+    (event_id, category, source, report_name, report_company, report_time, business_type,
+    business_subtype, district_name, block_name, fault_name, fault_type, lng, lat, case_fid,
+    description, address, report_type, damage_extent, declare_way, city)
+    values
+    <foreach collection="infos" item="info" index="index" separator=",">
+      (#{info.eventId}, #{info.category}, #{info.source}, #{info.reportName}, #{info.reportCompany},
+      #{info.reportTime}, #{info.businessType}, #{info.businessSubtype}, #{info.districtName},
+      #{info.blockName}, #{info.faultName}, #{info.faultType}, #{info.lng}, #{info.lat},
+      #{info.caseFid}, #{info.description}, #{info.address}, #{info.reportType},
+      #{info.damageExtent}, #{info.declareWay}, #{info.city})
+    </foreach>
+  </insert>
+
+  <select id="selectNonSyncEventIds" resultType="java.lang.String">
+    select DISTINCT b.event_id from t_event_report_basic b
+    full join t_event_report_status s
+    on b.event_id = s.event_fid
+    where s.event_fid is null
+  </select>
+</mapper>

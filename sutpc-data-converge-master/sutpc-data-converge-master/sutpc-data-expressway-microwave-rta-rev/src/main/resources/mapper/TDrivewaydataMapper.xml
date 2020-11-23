@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.expressway.microwave.rta.mapper.TDrivewaydataMapper">
+  <resultMap id="BaseResultMap" type="com.sutpc.data.rev.expressway.microwave.rta.entity.TDrivewaydata">
+    <id column="FLOWID" jdbcType="BIGINT" property="flowid" />
+    <result column="ACCUMULATEHEADINTERVAL" jdbcType="BIGINT" property="accumulateheadinterval" />
+    <result column="ACCUMULATEINTERVAL" jdbcType="BIGINT" property="accumulateinterval" />
+    <result column="ACCUMULATEOCCUPANCY" jdbcType="BIGINT" property="accumulateoccupancy" />
+    <result column="ACCUMULATEQUEUELENGTH" jdbcType="BIGINT" property="accumulatequeuelength" />
+    <result column="ACCUMULATEQUEUETIME" jdbcType="BIGINT" property="accumulatequeuetime" />
+    <result column="ACCUMULATEVEHICLELENGTH" jdbcType="DOUBLE" property="accumulatevehiclelength" />
+    <result column="ACCUMULATEVELOCITY" jdbcType="DOUBLE" property="accumulatevelocity" />
+    <result column="AVERAGEHEADINTERVAL" jdbcType="BIGINT" property="averageheadinterval" />
+    <result column="AVERAGEINTERVAL" jdbcType="BIGINT" property="averageinterval" />
+    <result column="AVERAGEOCCUPANCY" jdbcType="BIGINT" property="averageoccupancy" />
+    <result column="AVERAGEVEHICLELENGTH" jdbcType="DOUBLE" property="averagevehiclelength" />
+    <result column="AVERAGEVELOCITY" jdbcType="DOUBLE" property="averagevelocity" />
+    <result column="DRIVEWAYCODE" jdbcType="VARCHAR" property="drivewaycode" />
+    <result column="INTERSECTIONCODE" jdbcType="VARCHAR" property="intersectioncode" />
+    <result column="LARGERVEHICLECOUNT" jdbcType="INTEGER" property="largervehiclecount" />
+    <result column="MAXHEADINTERVAL" jdbcType="BIGINT" property="maxheadinterval" />
+    <result column="MAXINTERVAL" jdbcType="BIGINT" property="maxinterval" />
+    <result column="MAXOCCUPANCY" jdbcType="BIGINT" property="maxoccupancy" />
+    <result column="MAXQUEUELENGTH" jdbcType="BIGINT" property="maxqueuelength" />
+    <result column="MAXVEHICLELENGTH" jdbcType="DOUBLE" property="maxvehiclelength" />
+    <result column="MAXVELOCITY" jdbcType="DOUBLE" property="maxvelocity" />
+    <result column="MIDSIZEVEHICLECOUNT" jdbcType="INTEGER" property="midsizevehiclecount" />
+    <result column="MINHEADINTERVAL" jdbcType="BIGINT" property="minheadinterval" />
+    <result column="MININTERVAL" jdbcType="BIGINT" property="mininterval" />
+    <result column="MINITYPEVEHICLECOUNT" jdbcType="INTEGER" property="minitypevehiclecount" />
+    <result column="MINOCCUPANCY" jdbcType="BIGINT" property="minoccupancy" />
+    <result column="MINQUEUELENGTH" jdbcType="BIGINT" property="minqueuelength" />
+    <result column="MINVEHICLELENGTH" jdbcType="DOUBLE" property="minvehiclelength" />
+    <result column="MINVELOCITY" jdbcType="DOUBLE" property="minvelocity" />
+    <result column="MOTOVEHICLECOUNT" jdbcType="INTEGER" property="motovehiclecount" />
+    <result column="PRECEDINGWAYFULLTIME" jdbcType="BIGINT" property="precedingwayfulltime" />
+    <result column="RESERVERCOUNT1" jdbcType="INTEGER" property="reservercount1" />
+    <result column="RESERVERCOUNT2" jdbcType="INTEGER" property="reservercount2" />
+    <result column="RESERVERCOUNT3" jdbcType="INTEGER" property="reservercount3" />
+    <result column="RESERVERCOUNT4" jdbcType="INTEGER" property="reservercount4" />
+    <result column="RESERVERCOUNT5" jdbcType="INTEGER" property="reservercount5" />
+    <result column="RESERVERCOUNT6" jdbcType="INTEGER" property="reservercount6" />
+    <result column="RUNREDLIGHTCOUNT" jdbcType="BIGINT" property="runredlightcount" />
+    <result column="SENDTIME" jdbcType="TIMESTAMP" property="sendtime" />
+    <result column="SMALLVEHICLECOUNT" jdbcType="INTEGER" property="smallvehiclecount" />
+    <result column="SUBFLOWID" jdbcType="BIGINT" property="subflowid" />
+    <result column="VDTYPE" jdbcType="INTEGER" property="vdtype" />
+    <result column="VEHICLECOUNT" jdbcType="INTEGER" property="vehiclecount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    FLOWID, ACCUMULATEHEADINTERVAL, ACCUMULATEINTERVAL, ACCUMULATEOCCUPANCY, ACCUMULATEQUEUELENGTH, 
+    ACCUMULATEQUEUETIME, ACCUMULATEVEHICLELENGTH, ACCUMULATEVELOCITY, AVERAGEHEADINTERVAL, 
+    AVERAGEINTERVAL, AVERAGEOCCUPANCY, AVERAGEVEHICLELENGTH, AVERAGEVELOCITY, DRIVEWAYCODE, 
+    INTERSECTIONCODE, LARGERVEHICLECOUNT, MAXHEADINTERVAL, MAXINTERVAL, MAXOCCUPANCY, 
+    MAXQUEUELENGTH, MAXVEHICLELENGTH, MAXVELOCITY, MIDSIZEVEHICLECOUNT, MINHEADINTERVAL, 
+    MININTERVAL, MINITYPEVEHICLECOUNT, MINOCCUPANCY, MINQUEUELENGTH, MINVEHICLELENGTH, 
+    MINVELOCITY, MOTOVEHICLECOUNT, PRECEDINGWAYFULLTIME, RESERVERCOUNT1, RESERVERCOUNT2, 
+    RESERVERCOUNT3, RESERVERCOUNT4, RESERVERCOUNT5, RESERVERCOUNT6, RUNREDLIGHTCOUNT, 
+    SENDTIME, SMALLVEHICLECOUNT, SUBFLOWID, VDTYPE, VEHICLECOUNT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_drivewaydata
+    where FLOWID = #{flowid,jdbcType=BIGINT}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List" />
+    from ST.T_DRIVEWAYDATA
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_drivewaydata
+    where FLOWID = #{flowid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TDrivewaydata">
+    insert into t_drivewaydata (FLOWID, ACCUMULATEHEADINTERVAL, ACCUMULATEINTERVAL, 
+      ACCUMULATEOCCUPANCY, ACCUMULATEQUEUELENGTH, 
+      ACCUMULATEQUEUETIME, ACCUMULATEVEHICLELENGTH, 
+      ACCUMULATEVELOCITY, AVERAGEHEADINTERVAL, 
+      AVERAGEINTERVAL, AVERAGEOCCUPANCY, AVERAGEVEHICLELENGTH, 
+      AVERAGEVELOCITY, DRIVEWAYCODE, INTERSECTIONCODE, 
+      LARGERVEHICLECOUNT, MAXHEADINTERVAL, MAXINTERVAL, 
+      MAXOCCUPANCY, MAXQUEUELENGTH, MAXVEHICLELENGTH, 
+      MAXVELOCITY, MIDSIZEVEHICLECOUNT, MINHEADINTERVAL, 
+      MININTERVAL, MINITYPEVEHICLECOUNT, MINOCCUPANCY, 
+      MINQUEUELENGTH, MINVEHICLELENGTH, MINVELOCITY, 
+      MOTOVEHICLECOUNT, PRECEDINGWAYFULLTIME, 
+      RESERVERCOUNT1, RESERVERCOUNT2, RESERVERCOUNT3, 
+      RESERVERCOUNT4, RESERVERCOUNT5, RESERVERCOUNT6, 
+      RUNREDLIGHTCOUNT, SENDTIME, SMALLVEHICLECOUNT, 
+      SUBFLOWID, VDTYPE, VEHICLECOUNT
+      )
+    values (#{flowid,jdbcType=BIGINT}, #{accumulateheadinterval,jdbcType=BIGINT}, #{accumulateinterval,jdbcType=BIGINT}, 
+      #{accumulateoccupancy,jdbcType=BIGINT}, #{accumulatequeuelength,jdbcType=BIGINT}, 
+      #{accumulatequeuetime,jdbcType=BIGINT}, #{accumulatevehiclelength,jdbcType=DOUBLE}, 
+      #{accumulatevelocity,jdbcType=DOUBLE}, #{averageheadinterval,jdbcType=BIGINT}, 
+      #{averageinterval,jdbcType=BIGINT}, #{averageoccupancy,jdbcType=BIGINT}, #{averagevehiclelength,jdbcType=DOUBLE}, 
+      #{averagevelocity,jdbcType=DOUBLE}, #{drivewaycode,jdbcType=VARCHAR}, #{intersectioncode,jdbcType=VARCHAR}, 
+      #{largervehiclecount,jdbcType=INTEGER}, #{maxheadinterval,jdbcType=BIGINT}, #{maxinterval,jdbcType=BIGINT}, 
+      #{maxoccupancy,jdbcType=BIGINT}, #{maxqueuelength,jdbcType=BIGINT}, #{maxvehiclelength,jdbcType=DOUBLE}, 
+      #{maxvelocity,jdbcType=DOUBLE}, #{midsizevehiclecount,jdbcType=INTEGER}, #{minheadinterval,jdbcType=BIGINT}, 
+      #{mininterval,jdbcType=BIGINT}, #{minitypevehiclecount,jdbcType=INTEGER}, #{minoccupancy,jdbcType=BIGINT}, 
+      #{minqueuelength,jdbcType=BIGINT}, #{minvehiclelength,jdbcType=DOUBLE}, #{minvelocity,jdbcType=DOUBLE}, 
+      #{motovehiclecount,jdbcType=INTEGER}, #{precedingwayfulltime,jdbcType=BIGINT}, 
+      #{reservercount1,jdbcType=INTEGER}, #{reservercount2,jdbcType=INTEGER}, #{reservercount3,jdbcType=INTEGER}, 
+      #{reservercount4,jdbcType=INTEGER}, #{reservercount5,jdbcType=INTEGER}, #{reservercount6,jdbcType=INTEGER}, 
+      #{runredlightcount,jdbcType=BIGINT}, #{sendtime,jdbcType=TIMESTAMP}, #{smallvehiclecount,jdbcType=INTEGER}, 
+      #{subflowid,jdbcType=BIGINT}, #{vdtype,jdbcType=INTEGER}, #{vehiclecount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TDrivewaydata">
+    insert into t_drivewaydata
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="flowid != null">
+        FLOWID,
+      </if>
+      <if test="accumulateheadinterval != null">
+        ACCUMULATEHEADINTERVAL,
+      </if>
+      <if test="accumulateinterval != null">
+        ACCUMULATEINTERVAL,
+      </if>
+      <if test="accumulateoccupancy != null">
+        ACCUMULATEOCCUPANCY,
+      </if>
+      <if test="accumulatequeuelength != null">
+        ACCUMULATEQUEUELENGTH,
+      </if>
+      <if test="accumulatequeuetime != null">
+        ACCUMULATEQUEUETIME,
+      </if>
+      <if test="accumulatevehiclelength != null">
+        ACCUMULATEVEHICLELENGTH,
+      </if>
+      <if test="accumulatevelocity != null">
+        ACCUMULATEVELOCITY,
+      </if>
+      <if test="averageheadinterval != null">
+        AVERAGEHEADINTERVAL,
+      </if>
+      <if test="averageinterval != null">
+        AVERAGEINTERVAL,
+      </if>
+      <if test="averageoccupancy != null">
+        AVERAGEOCCUPANCY,
+      </if>
+      <if test="averagevehiclelength != null">
+        AVERAGEVEHICLELENGTH,
+      </if>
+      <if test="averagevelocity != null">
+        AVERAGEVELOCITY,
+      </if>
+      <if test="drivewaycode != null">
+        DRIVEWAYCODE,
+      </if>
+      <if test="intersectioncode != null">
+        INTERSECTIONCODE,
+      </if>
+      <if test="largervehiclecount != null">
+        LARGERVEHICLECOUNT,
+      </if>
+      <if test="maxheadinterval != null">
+        MAXHEADINTERVAL,
+      </if>
+      <if test="maxinterval != null">
+        MAXINTERVAL,
+      </if>
+      <if test="maxoccupancy != null">
+        MAXOCCUPANCY,
+      </if>
+      <if test="maxqueuelength != null">
+        MAXQUEUELENGTH,
+      </if>
+      <if test="maxvehiclelength != null">
+        MAXVEHICLELENGTH,
+      </if>
+      <if test="maxvelocity != null">
+        MAXVELOCITY,
+      </if>
+      <if test="midsizevehiclecount != null">
+        MIDSIZEVEHICLECOUNT,
+      </if>
+      <if test="minheadinterval != null">
+        MINHEADINTERVAL,
+      </if>
+      <if test="mininterval != null">
+        MININTERVAL,
+      </if>
+      <if test="minitypevehiclecount != null">
+        MINITYPEVEHICLECOUNT,
+      </if>
+      <if test="minoccupancy != null">
+        MINOCCUPANCY,
+      </if>
+      <if test="minqueuelength != null">
+        MINQUEUELENGTH,
+      </if>
+      <if test="minvehiclelength != null">
+        MINVEHICLELENGTH,
+      </if>
+      <if test="minvelocity != null">
+        MINVELOCITY,
+      </if>
+      <if test="motovehiclecount != null">
+        MOTOVEHICLECOUNT,
+      </if>
+      <if test="precedingwayfulltime != null">
+        PRECEDINGWAYFULLTIME,
+      </if>
+      <if test="reservercount1 != null">
+        RESERVERCOUNT1,
+      </if>
+      <if test="reservercount2 != null">
+        RESERVERCOUNT2,
+      </if>
+      <if test="reservercount3 != null">
+        RESERVERCOUNT3,
+      </if>
+      <if test="reservercount4 != null">
+        RESERVERCOUNT4,
+      </if>
+      <if test="reservercount5 != null">
+        RESERVERCOUNT5,
+      </if>
+      <if test="reservercount6 != null">
+        RESERVERCOUNT6,
+      </if>
+      <if test="runredlightcount != null">
+        RUNREDLIGHTCOUNT,
+      </if>
+      <if test="sendtime != null">
+        SENDTIME,
+      </if>
+      <if test="smallvehiclecount != null">
+        SMALLVEHICLECOUNT,
+      </if>
+      <if test="subflowid != null">
+        SUBFLOWID,
+      </if>
+      <if test="vdtype != null">
+        VDTYPE,
+      </if>
+      <if test="vehiclecount != null">
+        VEHICLECOUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="flowid != null">
+        #{flowid,jdbcType=BIGINT},
+      </if>
+      <if test="accumulateheadinterval != null">
+        #{accumulateheadinterval,jdbcType=BIGINT},
+      </if>
+      <if test="accumulateinterval != null">
+        #{accumulateinterval,jdbcType=BIGINT},
+      </if>
+      <if test="accumulateoccupancy != null">
+        #{accumulateoccupancy,jdbcType=BIGINT},
+      </if>
+      <if test="accumulatequeuelength != null">
+        #{accumulatequeuelength,jdbcType=BIGINT},
+      </if>
+      <if test="accumulatequeuetime != null">
+        #{accumulatequeuetime,jdbcType=BIGINT},
+      </if>
+      <if test="accumulatevehiclelength != null">
+        #{accumulatevehiclelength,jdbcType=DOUBLE},
+      </if>
+      <if test="accumulatevelocity != null">
+        #{accumulatevelocity,jdbcType=DOUBLE},
+      </if>
+      <if test="averageheadinterval != null">
+        #{averageheadinterval,jdbcType=BIGINT},
+      </if>
+      <if test="averageinterval != null">
+        #{averageinterval,jdbcType=BIGINT},
+      </if>
+      <if test="averageoccupancy != null">
+        #{averageoccupancy,jdbcType=BIGINT},
+      </if>
+      <if test="averagevehiclelength != null">
+        #{averagevehiclelength,jdbcType=DOUBLE},
+      </if>
+      <if test="averagevelocity != null">
+        #{averagevelocity,jdbcType=DOUBLE},
+      </if>
+      <if test="drivewaycode != null">
+        #{drivewaycode,jdbcType=VARCHAR},
+      </if>
+      <if test="intersectioncode != null">
+        #{intersectioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="largervehiclecount != null">
+        #{largervehiclecount,jdbcType=INTEGER},
+      </if>
+      <if test="maxheadinterval != null">
+        #{maxheadinterval,jdbcType=BIGINT},
+      </if>
+      <if test="maxinterval != null">
+        #{maxinterval,jdbcType=BIGINT},
+      </if>
+      <if test="maxoccupancy != null">
+        #{maxoccupancy,jdbcType=BIGINT},
+      </if>
+      <if test="maxqueuelength != null">
+        #{maxqueuelength,jdbcType=BIGINT},
+      </if>
+      <if test="maxvehiclelength != null">
+        #{maxvehiclelength,jdbcType=DOUBLE},
+      </if>
+      <if test="maxvelocity != null">
+        #{maxvelocity,jdbcType=DOUBLE},
+      </if>
+      <if test="midsizevehiclecount != null">
+        #{midsizevehiclecount,jdbcType=INTEGER},
+      </if>
+      <if test="minheadinterval != null">
+        #{minheadinterval,jdbcType=BIGINT},
+      </if>
+      <if test="mininterval != null">
+        #{mininterval,jdbcType=BIGINT},
+      </if>
+      <if test="minitypevehiclecount != null">
+        #{minitypevehiclecount,jdbcType=INTEGER},
+      </if>
+      <if test="minoccupancy != null">
+        #{minoccupancy,jdbcType=BIGINT},
+      </if>
+      <if test="minqueuelength != null">
+        #{minqueuelength,jdbcType=BIGINT},
+      </if>
+      <if test="minvehiclelength != null">
+        #{minvehiclelength,jdbcType=DOUBLE},
+      </if>
+      <if test="minvelocity != null">
+        #{minvelocity,jdbcType=DOUBLE},
+      </if>
+      <if test="motovehiclecount != null">
+        #{motovehiclecount,jdbcType=INTEGER},
+      </if>
+      <if test="precedingwayfulltime != null">
+        #{precedingwayfulltime,jdbcType=BIGINT},
+      </if>
+      <if test="reservercount1 != null">
+        #{reservercount1,jdbcType=INTEGER},
+      </if>
+      <if test="reservercount2 != null">
+        #{reservercount2,jdbcType=INTEGER},
+      </if>
+      <if test="reservercount3 != null">
+        #{reservercount3,jdbcType=INTEGER},
+      </if>
+      <if test="reservercount4 != null">
+        #{reservercount4,jdbcType=INTEGER},
+      </if>
+      <if test="reservercount5 != null">
+        #{reservercount5,jdbcType=INTEGER},
+      </if>
+      <if test="reservercount6 != null">
+        #{reservercount6,jdbcType=INTEGER},
+      </if>
+      <if test="runredlightcount != null">
+        #{runredlightcount,jdbcType=BIGINT},
+      </if>
+      <if test="sendtime != null">
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="smallvehiclecount != null">
+        #{smallvehiclecount,jdbcType=INTEGER},
+      </if>
+      <if test="subflowid != null">
+        #{subflowid,jdbcType=BIGINT},
+      </if>
+      <if test="vdtype != null">
+        #{vdtype,jdbcType=INTEGER},
+      </if>
+      <if test="vehiclecount != null">
+        #{vehiclecount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TDrivewaydata">
+    update t_drivewaydata
+    <set>
+      <if test="accumulateheadinterval != null">
+        ACCUMULATEHEADINTERVAL = #{accumulateheadinterval,jdbcType=BIGINT},
+      </if>
+      <if test="accumulateinterval != null">
+        ACCUMULATEINTERVAL = #{accumulateinterval,jdbcType=BIGINT},
+      </if>
+      <if test="accumulateoccupancy != null">
+        ACCUMULATEOCCUPANCY = #{accumulateoccupancy,jdbcType=BIGINT},
+      </if>
+      <if test="accumulatequeuelength != null">
+        ACCUMULATEQUEUELENGTH = #{accumulatequeuelength,jdbcType=BIGINT},
+      </if>
+      <if test="accumulatequeuetime != null">
+        ACCUMULATEQUEUETIME = #{accumulatequeuetime,jdbcType=BIGINT},
+      </if>
+      <if test="accumulatevehiclelength != null">
+        ACCUMULATEVEHICLELENGTH = #{accumulatevehiclelength,jdbcType=DOUBLE},
+      </if>
+      <if test="accumulatevelocity != null">
+        ACCUMULATEVELOCITY = #{accumulatevelocity,jdbcType=DOUBLE},
+      </if>
+      <if test="averageheadinterval != null">
+        AVERAGEHEADINTERVAL = #{averageheadinterval,jdbcType=BIGINT},
+      </if>
+      <if test="averageinterval != null">
+        AVERAGEINTERVAL = #{averageinterval,jdbcType=BIGINT},
+      </if>
+      <if test="averageoccupancy != null">
+        AVERAGEOCCUPANCY = #{averageoccupancy,jdbcType=BIGINT},
+      </if>
+      <if test="averagevehiclelength != null">
+        AVERAGEVEHICLELENGTH = #{averagevehiclelength,jdbcType=DOUBLE},
+      </if>
+      <if test="averagevelocity != null">
+        AVERAGEVELOCITY = #{averagevelocity,jdbcType=DOUBLE},
+      </if>
+      <if test="drivewaycode != null">
+        DRIVEWAYCODE = #{drivewaycode,jdbcType=VARCHAR},
+      </if>
+      <if test="intersectioncode != null">
+        INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="largervehiclecount != null">
+        LARGERVEHICLECOUNT = #{largervehiclecount,jdbcType=INTEGER},
+      </if>
+      <if test="maxheadinterval != null">
+        MAXHEADINTERVAL = #{maxheadinterval,jdbcType=BIGINT},
+      </if>
+      <if test="maxinterval != null">
+        MAXINTERVAL = #{maxinterval,jdbcType=BIGINT},
+      </if>
+      <if test="maxoccupancy != null">
+        MAXOCCUPANCY = #{maxoccupancy,jdbcType=BIGINT},
+      </if>
+      <if test="maxqueuelength != null">
+        MAXQUEUELENGTH = #{maxqueuelength,jdbcType=BIGINT},
+      </if>
+      <if test="maxvehiclelength != null">
+        MAXVEHICLELENGTH = #{maxvehiclelength,jdbcType=DOUBLE},
+      </if>
+      <if test="maxvelocity != null">
+        MAXVELOCITY = #{maxvelocity,jdbcType=DOUBLE},
+      </if>
+      <if test="midsizevehiclecount != null">
+        MIDSIZEVEHICLECOUNT = #{midsizevehiclecount,jdbcType=INTEGER},
+      </if>
+      <if test="minheadinterval != null">
+        MINHEADINTERVAL = #{minheadinterval,jdbcType=BIGINT},
+      </if>
+      <if test="mininterval != null">
+        MININTERVAL = #{mininterval,jdbcType=BIGINT},
+      </if>
+      <if test="minitypevehiclecount != null">
+        MINITYPEVEHICLECOUNT = #{minitypevehiclecount,jdbcType=INTEGER},
+      </if>
+      <if test="minoccupancy != null">
+        MINOCCUPANCY = #{minoccupancy,jdbcType=BIGINT},
+      </if>
+      <if test="minqueuelength != null">
+        MINQUEUELENGTH = #{minqueuelength,jdbcType=BIGINT},
+      </if>
+      <if test="minvehiclelength != null">
+        MINVEHICLELENGTH = #{minvehiclelength,jdbcType=DOUBLE},
+      </if>
+      <if test="minvelocity != null">
+        MINVELOCITY = #{minvelocity,jdbcType=DOUBLE},
+      </if>
+      <if test="motovehiclecount != null">
+        MOTOVEHICLECOUNT = #{motovehiclecount,jdbcType=INTEGER},
+      </if>
+      <if test="precedingwayfulltime != null">
+        PRECEDINGWAYFULLTIME = #{precedingwayfulltime,jdbcType=BIGINT},
+      </if>
+      <if test="reservercount1 != null">
+        RESERVERCOUNT1 = #{reservercount1,jdbcType=INTEGER},
+      </if>
+      <if test="reservercount2 != null">
+        RESERVERCOUNT2 = #{reservercount2,jdbcType=INTEGER},
+      </if>
+      <if test="reservercount3 != null">
+        RESERVERCOUNT3 = #{reservercount3,jdbcType=INTEGER},
+      </if>
+      <if test="reservercount4 != null">
+        RESERVERCOUNT4 = #{reservercount4,jdbcType=INTEGER},
+      </if>
+      <if test="reservercount5 != null">
+        RESERVERCOUNT5 = #{reservercount5,jdbcType=INTEGER},
+      </if>
+      <if test="reservercount6 != null">
+        RESERVERCOUNT6 = #{reservercount6,jdbcType=INTEGER},
+      </if>
+      <if test="runredlightcount != null">
+        RUNREDLIGHTCOUNT = #{runredlightcount,jdbcType=BIGINT},
+      </if>
+      <if test="sendtime != null">
+        SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="smallvehiclecount != null">
+        SMALLVEHICLECOUNT = #{smallvehiclecount,jdbcType=INTEGER},
+      </if>
+      <if test="subflowid != null">
+        SUBFLOWID = #{subflowid,jdbcType=BIGINT},
+      </if>
+      <if test="vdtype != null">
+        VDTYPE = #{vdtype,jdbcType=INTEGER},
+      </if>
+      <if test="vehiclecount != null">
+        VEHICLECOUNT = #{vehiclecount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where FLOWID = #{flowid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TDrivewaydata">
+    update t_drivewaydata
+    set ACCUMULATEHEADINTERVAL = #{accumulateheadinterval,jdbcType=BIGINT},
+      ACCUMULATEINTERVAL = #{accumulateinterval,jdbcType=BIGINT},
+      ACCUMULATEOCCUPANCY = #{accumulateoccupancy,jdbcType=BIGINT},
+      ACCUMULATEQUEUELENGTH = #{accumulatequeuelength,jdbcType=BIGINT},
+      ACCUMULATEQUEUETIME = #{accumulatequeuetime,jdbcType=BIGINT},
+      ACCUMULATEVEHICLELENGTH = #{accumulatevehiclelength,jdbcType=DOUBLE},
+      ACCUMULATEVELOCITY = #{accumulatevelocity,jdbcType=DOUBLE},
+      AVERAGEHEADINTERVAL = #{averageheadinterval,jdbcType=BIGINT},
+      AVERAGEINTERVAL = #{averageinterval,jdbcType=BIGINT},
+      AVERAGEOCCUPANCY = #{averageoccupancy,jdbcType=BIGINT},
+      AVERAGEVEHICLELENGTH = #{averagevehiclelength,jdbcType=DOUBLE},
+      AVERAGEVELOCITY = #{averagevelocity,jdbcType=DOUBLE},
+      DRIVEWAYCODE = #{drivewaycode,jdbcType=VARCHAR},
+      INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR},
+      LARGERVEHICLECOUNT = #{largervehiclecount,jdbcType=INTEGER},
+      MAXHEADINTERVAL = #{maxheadinterval,jdbcType=BIGINT},
+      MAXINTERVAL = #{maxinterval,jdbcType=BIGINT},
+      MAXOCCUPANCY = #{maxoccupancy,jdbcType=BIGINT},
+      MAXQUEUELENGTH = #{maxqueuelength,jdbcType=BIGINT},
+      MAXVEHICLELENGTH = #{maxvehiclelength,jdbcType=DOUBLE},
+      MAXVELOCITY = #{maxvelocity,jdbcType=DOUBLE},
+      MIDSIZEVEHICLECOUNT = #{midsizevehiclecount,jdbcType=INTEGER},
+      MINHEADINTERVAL = #{minheadinterval,jdbcType=BIGINT},
+      MININTERVAL = #{mininterval,jdbcType=BIGINT},
+      MINITYPEVEHICLECOUNT = #{minitypevehiclecount,jdbcType=INTEGER},
+      MINOCCUPANCY = #{minoccupancy,jdbcType=BIGINT},
+      MINQUEUELENGTH = #{minqueuelength,jdbcType=BIGINT},
+      MINVEHICLELENGTH = #{minvehiclelength,jdbcType=DOUBLE},
+      MINVELOCITY = #{minvelocity,jdbcType=DOUBLE},
+      MOTOVEHICLECOUNT = #{motovehiclecount,jdbcType=INTEGER},
+      PRECEDINGWAYFULLTIME = #{precedingwayfulltime,jdbcType=BIGINT},
+      RESERVERCOUNT1 = #{reservercount1,jdbcType=INTEGER},
+      RESERVERCOUNT2 = #{reservercount2,jdbcType=INTEGER},
+      RESERVERCOUNT3 = #{reservercount3,jdbcType=INTEGER},
+      RESERVERCOUNT4 = #{reservercount4,jdbcType=INTEGER},
+      RESERVERCOUNT5 = #{reservercount5,jdbcType=INTEGER},
+      RESERVERCOUNT6 = #{reservercount6,jdbcType=INTEGER},
+      RUNREDLIGHTCOUNT = #{runredlightcount,jdbcType=BIGINT},
+      SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+      SMALLVEHICLECOUNT = #{smallvehiclecount,jdbcType=INTEGER},
+      SUBFLOWID = #{subflowid,jdbcType=BIGINT},
+      VDTYPE = #{vdtype,jdbcType=INTEGER},
+      VEHICLECOUNT = #{vehiclecount,jdbcType=INTEGER}
+    where FLOWID = #{flowid,jdbcType=BIGINT}
+  </update>
+</mapper>

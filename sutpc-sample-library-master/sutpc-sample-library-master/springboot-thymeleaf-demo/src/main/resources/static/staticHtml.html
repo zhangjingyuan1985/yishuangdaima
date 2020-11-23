@@ -1,0 +1,46 @@
+<!-- 页面静态展示 http://ip:prot/staticHtml.html 访问 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="./js/jquery.js"></script>
+<script src="./js/jquery-1.7.1.js"></script>
+<body>
+静态显示页面！
+<button type="button" onclick="successReq()">提交成功</button>
+</body>
+
+<script>
+
+    function successReq(){
+
+        var adata = {
+            "mail" : "123",
+            "name" : "1231"
+        };
+        var data = JSON.stringify(adata);
+        $.ajax({
+            type : "POST",
+            dataType: "json",//通过GET方式上传请求
+            contentType : "application/json",//上传内容格式为json结构
+            data : data,                                 //上传的参数
+            async: false ,
+            url : "demo/successReq",     //请求的url。与后端@Request Mapping注解中的值一致。
+            success : function(data) {          //请求成功的回调函数
+                if (data.code === '200'){
+                    alert("成功后 data 数据 结果返回 name：" + data.data.name + " mail: " + data.data.mail);
+                    window.location.href = "success";
+                } else {
+                    alert("请求失败 结果返回 name：" + data.msg);
+                    window.location.href = "error";
+                }
+            },
+            error : function(e) {           //请求失败的回调函数
+                console.log(e);
+            }
+        });
+    };
+</script>
+</html>

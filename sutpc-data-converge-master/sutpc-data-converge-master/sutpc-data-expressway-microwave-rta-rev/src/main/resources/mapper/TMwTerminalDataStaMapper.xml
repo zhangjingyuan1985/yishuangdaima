@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.expressway.microwave.rta.mapper.TMwTerminalDataStaMapper">
+  <resultMap id="BaseResultMap"
+    type="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwTerminalDataSta">
+    <result column="TERMINALID" jdbcType="BIGINT" property="terminalid"/>
+    <result column="COLLECTIONTIME" jdbcType="DATE" property="collectiontime"/>
+    <result column="CREATETIME" jdbcType="DATE" property="createtime"/>
+    <result column="LANE" jdbcType="INTEGER" property="lane"/>
+    <result column="VEHICLENUM" jdbcType="INTEGER" property="vehiclenum"/>
+    <result column="OCC" jdbcType="DOUBLE" property="occ"/>
+    <result column="SPEED_AVG" jdbcType="INTEGER" property="speedAvg"/>
+    <result column="GAP_AVG" jdbcType="INTEGER" property="gapAvg"/>
+    <result column="NUM_TYPE1" jdbcType="INTEGER" property="numType1"/>
+    <result column="NUM_TYPE2" jdbcType="INTEGER" property="numType2"/>
+    <result column="NUM_TYPE3" jdbcType="INTEGER" property="numType3"/>
+    <result column="NUM_TYPE4" jdbcType="INTEGER" property="numType4"/>
+    <result column="NUM_TYPE5" jdbcType="INTEGER" property="numType5"/>
+  </resultMap>
+  <select id="findAll" resultMap="BaseResultMap">
+        SELECT TERMINALID,
+               COLLECTIONTIME,
+               CREATETIME,
+               LANE,
+               VEHICLENUM,
+               OCC,
+               SPEED_AVG,
+               GAP_AVG,
+               NUM_TYPE1,
+               NUM_TYPE2,
+               NUM_TYPE3,
+               NUM_TYPE4,
+               NUM_TYPE5
+        from HIGHWAY.T_MW_TERMINAL_DATA_STA
+    </select>
+  <insert id="insert"
+    parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwTerminalDataSta">
+        insert into t_mw_terminal_data_sta (TERMINALID, COLLECTIONTIME, CREATETIME,
+                                            LANE, VEHICLENUM, OCC,
+                                            SPEED_AVG, GAP_AVG, NUM_TYPE1,
+                                            NUM_TYPE2, NUM_TYPE3, NUM_TYPE4,
+                                            NUM_TYPE5)
+        values (#{terminalid,jdbcType=BIGINT}, #{collectiontime,jdbcType=DATE}, #{createtime,jdbcType=DATE},
+                #{lane,jdbcType=INTEGER}, #{vehiclenum,jdbcType=INTEGER}, #{occ,jdbcType=DOUBLE},
+                #{speedAvg,jdbcType=INTEGER}, #{gapAvg,jdbcType=INTEGER}, #{numType1,jdbcType=INTEGER},
+                #{numType2,jdbcType=INTEGER}, #{numType3,jdbcType=INTEGER}, #{numType4,jdbcType=INTEGER},
+                #{numType5,jdbcType=INTEGER})
+    </insert>
+  <insert id="insertSelective"
+    parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwTerminalDataSta">
+    insert into t_mw_terminal_data_sta
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="terminalid != null">
+        TERMINALID,
+      </if>
+      <if test="collectiontime != null">
+        COLLECTIONTIME,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="lane != null">
+        LANE,
+      </if>
+      <if test="vehiclenum != null">
+        VEHICLENUM,
+      </if>
+      <if test="occ != null">
+        OCC,
+      </if>
+      <if test="speedAvg != null">
+        SPEED_AVG,
+      </if>
+      <if test="gapAvg != null">
+        GAP_AVG,
+      </if>
+      <if test="numType1 != null">
+        NUM_TYPE1,
+      </if>
+      <if test="numType2 != null">
+        NUM_TYPE2,
+      </if>
+      <if test="numType3 != null">
+        NUM_TYPE3,
+      </if>
+      <if test="numType4 != null">
+        NUM_TYPE4,
+      </if>
+      <if test="numType5 != null">
+        NUM_TYPE5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="terminalid != null">
+        #{terminalid,jdbcType=BIGINT},
+      </if>
+      <if test="collectiontime != null">
+        #{collectiontime,jdbcType=DATE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="lane != null">
+        #{lane,jdbcType=INTEGER},
+      </if>
+      <if test="vehiclenum != null">
+        #{vehiclenum,jdbcType=INTEGER},
+      </if>
+      <if test="occ != null">
+        #{occ,jdbcType=DOUBLE},
+      </if>
+      <if test="speedAvg != null">
+        #{speedAvg,jdbcType=INTEGER},
+      </if>
+      <if test="gapAvg != null">
+        #{gapAvg,jdbcType=INTEGER},
+      </if>
+      <if test="numType1 != null">
+        #{numType1,jdbcType=INTEGER},
+      </if>
+      <if test="numType2 != null">
+        #{numType2,jdbcType=INTEGER},
+      </if>
+      <if test="numType3 != null">
+        #{numType3,jdbcType=INTEGER},
+      </if>
+      <if test="numType4 != null">
+        #{numType4,jdbcType=INTEGER},
+      </if>
+      <if test="numType5 != null">
+        #{numType5,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="findByCollectionTime" resultMap="BaseResultMap">
+        SELECT TERMINALID,
+               COLLECTIONTIME,
+               CREATETIME,
+               LANE,
+               VEHICLENUM,
+               OCC,
+               SPEED_AVG,
+               GAP_AVG,
+               NUM_TYPE1,
+               NUM_TYPE2,
+               NUM_TYPE3,
+               NUM_TYPE4,
+               NUM_TYPE5
+        from HIGHWAY.T_MW_TERMINAL_DATA_STA
+        where COLLECTIONTIME between to_date(#{startTime},'yyyymmddHH24miss') and to_date(#{endTime},'yyyymmddHH24miss')
+        order by COLLECTIONTIME asc
+    </select>
+
+</mapper>

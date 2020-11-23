@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: spb-tpapi-proxy
+
+  # kafka 配置
+  kafka:
+    consumer:
+      bootstrap-servers: 172.0.7.104:9092,172.0.7.105:9092,172.0.7.106:9092
+      group-id: sutpc-kafka-websocket-ftc
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      bus:
+        topic: topic_gps_bus
+      car:
+        topic: com.sutpc.its.ftc.gps
+
+  #邮件配置
+  mail:
+    host: smtp.163.com
+    username: futuretransportlab@163.com # 发送人邮件
+    password: gqnaesrtspywylyr # 客户端授权码
+    default-encoding: utf-8
+    protocol: smtp
+    toEmail: lx921110@163.com #收件人邮件
+
+#自定义告警 配置
+monitor:
+  email:
+    time:
+      bus: 20 # 实时公交 告警间隔时间
+      car: 20 # 实时重点车辆 告警间隔时间
+
+# 日志输出
+logging:
+    level:
+      com.sutpc.demo: INFO

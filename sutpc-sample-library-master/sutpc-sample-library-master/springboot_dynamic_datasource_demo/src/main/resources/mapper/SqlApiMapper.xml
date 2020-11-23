@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ISqlApiDao">
+  <select id="findObjects" resultType="com.example.demo.model.SqlApiEntity">
+       select title,endpoint,content from sql_api where 1=1 limit 10
+    </select>
+</mapper>

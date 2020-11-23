@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+#####################实时库 hive##################
+
+ nohup su - hdfs -c "spark-submit --master yarn  --deploy-mode client --class com.sutpc.bigdata.job.stream.GpsBaiduDriveStreamJob  --executor-cores 5 --num-executors 3  --executor-memory 5g --driver-memory 3g --conf spark.yarn.maxAppAttempts=4  --conf spark.task.maxFailures=8    --conf spark.yarn.am.attemptFailuresValidityInterval=1h --conf spark.yarn.executor.failuresValidityInterval=1h --conf spark.sql.adaptive.enabled=true    --conf spark.yarn.max.executor.failures=24 --conf  spark.streaming.backpressure.enabled=true --conf spark.blacklist.enabled=false  ./jars_zyt/spark-sutpc-1.0-SNAPSHOT.jar  '10.10.201.20:9092,10.10.201.21:9092,10.10.201.22:9092' group_spark  tp_baidu_nav_origin  300 transpaas_std_dev.s_vehicle_gps_drive_real" >>/root/spark-logs/s_vehicle_gps_drive_real.log 2>&1  &

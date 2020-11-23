@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+  <property name="now" value="now()" dbms="mysql,h2"/>
+  <property name="now" value="current_timestamp" dbms="postgresql"/>
+  <property name="now" value="sysdate" dbms="oracle"/>
+
+  <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+  <changeSet author="huying" id="v1.1">
+    <createTable tableName="t_model" remarks="模型">
+      <column name="id" type="varchar(32)" remarks="主键ID">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(50)" remarks="模型名"/>
+      <column name="description" type="varchar(100)" remarks="模型描述"/>
+      <column name="latest_version" type="INTEGER" remarks="版本"/>
+      <column name="project" type="varchar(50)" remarks="项目名称"/>
+      <column name="flow" type="varchar(50)" remarks="FLOW名称"/>
+      <column name="cron" type="VARCHAR(20)" remarks="cron调度配置"/>
+      <column name="cron_param" type="VARCHAR(100)" remarks="调度执行参数"/>
+      <column name="enable" type="BOOLEAN" remarks="是否启用" defaultValue="false"/>
+      <column name="create_by" type="VARCHAR(50)" remarks="创建者用户名" />
+      <column name="update_by" type="VARCHAR(50)" remarks="修改者用户名" />
+      <column name="create_time" type="varchar(20)" remarks="创建时间"/>
+      <column name="update_time" type="varchar(20)" remarks="更新时间"/>
+      <column name="is_deleted" type="TINYINT(1)" remarks="是否删除（0.否 1.是）" defaultValue="0" />
+    </createTable>
+
+    <createTable tableName="t_algo" remarks="算法">
+      <column name="id" type="varchar(32)" remarks="主键ID">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(50)" remarks="名称"/>
+      <column name="url" type="varchar(200)" remarks="文件URL"/>
+      <column name="description" type="varchar(100)" remarks="描述"/>
+      <column name="input_num" type="INTEGER" remarks="输入个数" defaultValue="0"/>
+      <column name="output_num" type="INTEGER" remarks="输出个数" defaultValue="0"/>
+      <column name="enable" type="BOOLEAN" remarks="是否启用" defaultValue="false"/>
+      <column name="create_by" type="VARCHAR(50)" remarks="创建者用户名" />
+      <column name="update_by" type="VARCHAR(50)" remarks="修改者用户名" />
+      <column name="create_time" type="varchar(20)" remarks="创建时间"/>
+      <column name="update_time" type="varchar(20)" remarks="更新时间"/>
+      <column name="is_deleted" type="TINYINT(1)" remarks="是否删除（0.否 1.是）" defaultValue="0" />
+    </createTable>
+
+    <createTable tableName="t_model_version" remarks="模型版本">
+      <column name="id" type="varchar(32)" remarks="主键ID">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="model_id" type="varchar(32)" remarks="模型ID"/>
+      <column name="name" type="varchar(50)" remarks="名称"/>
+      <column name="description" type="varchar(100)" remarks="描述"/>
+      <column name="create_by" type="VARCHAR(50)" remarks="创建者用户名" />
+      <column name="update_by" type="VARCHAR(50)" remarks="修改者用户名" />
+      <column name="create_time" type="varchar(20)" remarks="创建时间"/>
+      <column name="update_time" type="varchar(20)" remarks="更新时间"/>
+      <column name="is_deleted" type="TINYINT(1)" remarks="是否删除（0.否 1.是）" defaultValue="0" />
+    </createTable>
+
+    <createTable tableName="t_model_step" remarks="模型步骤">
+      <column name="id" type="varchar(32)" remarks="主键ID">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="model_id" type="varchar(32)" remarks="模型ID"/>
+      <column name="model_version_id" type="varchar(32)" remarks="模型版本ID"/>
+      <column name="type" type="TINYINT" remarks="类型:1-数据，2-算法"/>
+      <column name="relate_id" type="varchar(32)" remarks="相关ID"/>
+      <column name="name" type="varchar(100)" remarks="展示名"/>
+      <column name="ui" type="text" remarks="前端UI配置"/>
+      <column name="depends" type="varchar(200)" remarks="依赖，以逗号分隔"/>
+      <column name="idx" type="TINYINT" remarks="排序索引"/>
+      <column name="param" type="text" remarks="参数"/>
+      <column name="is_start" type="BOOLEAN" remarks="是否是启动节点" defaultValue="false"/>
+      <column name="is_end" type="BOOLEAN" remarks="是否是结束节点" defaultValue="false"/>
+      <column name="remarks" type="text" remarks="备注"/>
+    </createTable>
+
+    <createTable tableName="t_datasource" remarks="数据源">
+      <column name="id" type="varchar(32)" remarks="主键ID">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(50)" remarks="模型名"/>
+      <column name="description" type="varchar(100)" remarks="模型描述"/>
+      <column name="type" type="TINYINT" remarks="类型:0-PostgreSql,1-hive,2-mysql"/>
+      <column name="ip" type="varchar(15)" remarks="IP地址"/>
+      <column name="port" type="varchar(50)" remarks="端口号"/>
+      <column name="db" type="VARCHAR(50)" remarks="数据库名"/>
+      <column name="username" type="VARCHAR(50)" remarks="用户名"/>
+      <column name="password" type="VARCHAR(50)" remarks="密码"/>
+      <column name="param" type="VARCHAR(200)" remarks="连接参数"/>
+      <column name="create_by" type="VARCHAR(50)" remarks="创建者用户名" />
+      <column name="update_by" type="VARCHAR(50)" remarks="修改者用户名" />
+      <column name="create_time" type="varchar(20)" remarks="创建时间"/>
+      <column name="update_time" type="varchar(20)" remarks="更新时间"/>
+      <column name="is_deleted" type="TINYINT(1)" remarks="是否删除（0.否 1.是）" defaultValue="0" />
+    </createTable>
+
+    <createTable tableName="t_model_edge" remarks="模型的连接线">
+      <column name="id" type="varchar(32)" remarks="主键ID">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="model_id" type="varchar(32)" remarks="模型ID"/>
+      <column name="model_version_id" type="varchar(32)" remarks="模型版本ID"/>
+      <column name="type" type="TINYINT" remarks="类型:1-数据，2-算法"/>
+      <column name="source" type="varchar(32)" remarks="源头节点ID"/>
+      <column name="target" type="varchar(32)" remarks="目标节点ID"/>
+      <column name="source_anchor" type="tinyint" remarks="源头锚点编号"/>
+      <column name="target_anchor" type="tinyint" remarks="目标锚点编号"/>
+    </createTable>
+    
+    <createTable tableName="t_model_instance" remarks="模型实例">
+      <column name="id" type="varchar(32)" remarks="主键ID">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="model_id" type="varchar(32)" remarks="模型ID"/>
+      <column name="model_version_id" type="varchar(32)" remarks="模型版本ID"/>
+      <column name="execution_id" type="INTEGER" remarks="执行ID"/>
+      <column name="start_time" type="varchar(20)" remarks="开始时间"/>
+      <column name="end_time" type="varchar(20)" remarks="结束时间"/>
+      <column name="param" type="text" remarks="参数"/>
+      <column name="status" type="tinyint(1)" remarks="状态：0-排队中，1-执行中，2-执行成功，3-执行失败"/>
+      <column name="create_time" type="varchar(20)" remarks="创建时间"/>
+    </createTable>
+
+    <createTable tableName="t_model_instance_step" remarks="模型实例步骤">
+      <column name="id" type="varchar(32)" remarks="主键ID">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="model_id" type="varchar(32)" remarks="模型ID"/>
+      <column name="model_version_id" type="varchar(32)" remarks="模型版本ID"/>
+      <column name="model_instance_id" type="varchar(32)" remarks="模型实例ID"/>
+      <column name="model_step_id" type="varchar(32)" remarks="模型步骤ID"/>
+      <column name="start_time" type="varchar(20)" remarks="开始时间"/>
+      <column name="end_time" type="varchar(20)" remarks="结束时间"/>
+      <column name="status" type="tinyint(1)" remarks="状态：0-排队中，1-执行中，2-执行成功，3-执行失败"/>
+      <column name="create_time" type="varchar(20)" remarks="创建时间"/>
+    </createTable>
+    
+  </changeSet>
+</databaseChangeLog>

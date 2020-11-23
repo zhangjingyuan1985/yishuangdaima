@@ -1,0 +1,136 @@
+version: '2.1'
+services:
+  transpaas-view:
+    image: ${DOCKER_REGISTRY}/paas-view_nginx1.17.4:1.0.0
+    ports:
+      - ${WEB_PORT}:80
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    
+    restart: always
+    depends_on:
+      transpaas-api:
+        condition: service_healthy
+    networks:
+      - transpaas-network
+    volumes:
+      - ${BAGCLI_PROJECTS_PATH}/${BAGCLI_PROJECT_NAME}/:/src
+    command: ./src/script/run_nginx.sh
+
+  transpaas-api:
+    image: ${DOCKER_REGISTRY}/paas-cloud:0.0.2
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - JAVA_OPTS=-Xmx4g
+      - SPRING_APPLICATION_JSON={
+          "openman":{"root":"http://zuul:10088/"},
+          "db":{
+            "pgis":{"dataSource":{"user":"${DS_PG_USER}","password":"${DS_PG_PASS}","databaseName":"${DS_PG_NAME}","serverName":"${DS_PG_HOST}","portNumber":"${DS_PG_PORT}"}},
+            "hive":{"enabled":${DS_H1_OPEN},"url":"${DS_H1_ROOT}"},
+            "hive2":{"enabled":${DS_H2_OPEN},"url":"${DS_H2_ROOT}"},
+            "hive3":{"enabled":${DS_H3_OPEN},"url":"${DS_H3_ROOT}"},
+            "hive-metadata":{"url":"${DS_HM_ROOT}","username":"${DS_HM_USER}","password":"${DS_HM_PASS}"}},
+          "s3":{"url":"http://minio1:9000","access-key":"${MINIO_ACCESS_KEY}","secret-key":"${MINIO_SECRET_KEY}"},
+          "auth":{"root":"http://10.10.201.4:9053/sysmanager/","secret":"gh19$$qODBFrf"},
+          "spring":{
+            "datasource":{"url":"jdbc:postgresql://database/transpaas","username":"postgres","password":"${DATABASE_PASSWORD}","driver-class-name":"org.postgresql.Driver"},
+            "jpa":{"database":"postgresql"},
+            "redis":{"host":"redis","port":"6379"}}}
+    restart: always
+    depends_on:
+      database:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    networks:
+      - transpaas-network
+
+  sysman:
+    image: ${DOCKER_REGISTRY}/auth-1.0
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - JAVA_OPTS=-Xmx2g
+      - SPRING_APPLICATION_JSON={
+          "spring":{"datasource":{"url":"jdbc:postgresql://database/sysman","username":"postgres","password":"${DATABASE_PASSWORD}","driver-class-name":"org.postgresql.Driver"}}}
+    restart: always
+    depends_on:
+      database:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    networks:
+      - transpaas-network
+
+  zuul:
+    image: ${DOCKER_REGISTRY}/api-zuul
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev_tp
+      - JAVA_OPTS=-Xmx1g
+      - SPRING_APPLICATION_JSON={"spring":{"datasource":{"url":"jdbc:postgresql://database/zuul","username":"postgres","password":"${DATABASE_PASSWORD}","driver-class-name":"org.postgresql.Driver"}}}
+    restart: always
+    depends_on:
+      database:
+        condition: service_healthy
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    networks:
+      - transpaas-network
+
+  redis:
+    image: redis:5.0.7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    hostname: redis
+    networks:
+      - transpaas-network
+    volumes:
+      - redis_data1:/data
+    restart: always
+
+  database:
+    image: postgres:11.4
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    environment:
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    restart: always
+    volumes:
+      - ${BAGCLI_PROJECTS_PATH}/${BAGCLI_PROJECT_NAME}/volume_data/database/data:/var/lib/postgresql/data
+      - ${BAGCLI_PROJECTS_PATH}/${BAGCLI_PROJECT_NAME}/script/initdb:/docker-entrypoint-initdb.d
+    networks:
+      - transpaas-network
+
+  minio1:
+    image: minio/minio
+    volumes:
+      - ${BAGCLI_PROJECTS_PATH}/${BAGCLI_PROJECT_NAME}/volume_data/minio1/data:/data
+      - ${BAGCLI_PROJECTS_PATH}/${BAGCLI_PROJECT_NAME}/volume_data/minio1/config:/root/.minio
+    restart: always
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    command: server /data
+    networks:
+      - transpaas-network
+
+networks:
+  transpaas-network:
+    external: true
+
+volumes:
+  minio_data1:
+  redis_data1:

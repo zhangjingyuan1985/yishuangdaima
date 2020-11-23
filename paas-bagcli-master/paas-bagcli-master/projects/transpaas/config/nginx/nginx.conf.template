@@ -1,0 +1,43 @@
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    client_max_body_size 100m;
+    include       /etc/nginx/mime.types;
+    default_type  text/html;
+
+    server {
+        listen 80;
+        root         /var/www/html;
+
+        location /transpaas/api/v1/sys/openman/ {
+            proxy_pass          http://zuul:10088/;
+            proxy_set_header    X-Real-IP       ${DOLLAR}proxy_add_x_forwarded_for;
+        }
+
+        location /transpaas/api/v1/sys/ {
+            proxy_pass          http://10.10.201.4:9053/sysmanager/;
+            proxy_set_header    X-Real-IP       ${DOLLAR}proxy_add_x_forwarded_for;
+        }
+
+        location /transpaas/api/v1/ {
+            proxy_pass          http://transpaas-api:8080/;
+            proxy_set_header    X-Real-IP       ${DOLLAR}proxy_add_x_forwarded_for;
+        }
+
+        location ~ .*\.(?:jpg|jpeg|gif|png|ico|cur|gz|svg|svgz|mp4|ogg|ogv|webm)$ {
+            expires      7d;
+        }
+
+        location ~ .*\.(?:js|css)$ {
+            expires      7d;
+        }
+
+        location ~ .*\.(?:htm|html)$ {
+            add_header Cache-Control "private, no-store, no-cache, must-revalidate, proxy-revalidate";
+        }
+    }
+}

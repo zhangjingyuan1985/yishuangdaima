@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.aviation.rta.utilize.dao.FlightInfoMapper">
+  <resultMap id="BaseResultMap" type="com.sutpc.data.aviation.rta.utilize.entity.FlightInfo">
+    <id column="id" jdbcType="VARCHAR" property="id"/>
+    <result column="flightno" jdbcType="VARCHAR" property="flightno"/>
+    <result column="deptime" jdbcType="VARCHAR" property="deptime"/>
+    <result column="arrtime" jdbcType="VARCHAR" property="arrtime"/>
+    <result column="fstatus" jdbcType="VARCHAR" property="fstatus"/>
+    <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    <result column="isdelete" jdbcType="CHAR" property="isdelete"/>
+    <result column="createtime" jdbcType="VARCHAR" property="createtime"/>
+    <result column="updatetime" jdbcType="VARCHAR" property="updatetime"/>
+    <result column="fromcity" jdbcType="VARCHAR" property="fromcity"/>
+    <result column="tocity" jdbcType="VARCHAR" property="tocity"/>
+    <result column="ftype" jdbcType="CHAR" property="ftype"/>
+    <result column="companyid" jdbcType="VARCHAR" property="companyid"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, flightno, deptime, arrtime, fstatus, remark, isdelete, createtime, updatetime, 
+    fromcity, tocity, ftype, companyid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List"/>
+    from t_base_flightinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectExistInfo"
+    resultType="com.sutpc.data.aviation.rta.utilize.entity.FlightInfo">
+    select
+    <include refid="Base_Column_List"/>
+    from t_base_flightinfo
+    where flightno = #{flightno,jdbcType=VARCHAR} and ftype = #{ftype,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete
+    from t_base_flightinfo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sutpc.data.aviation.rta.utilize.entity.FlightInfo">
+    insert into t_base_flightinfo (id, flightno, deptime,
+                                   arrtime, fstatus, remark,
+                                   isdelete, createtime, updatetime,
+                                   fromcity, tocity, ftype,
+                                   companyid)
+    values (#{id,jdbcType=VARCHAR}, #{flightno,jdbcType=VARCHAR}, #{deptime,jdbcType=VARCHAR},
+            #{arrtime,jdbcType=VARCHAR}, #{fstatus,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+            #{isdelete,jdbcType=CHAR}, #{createtime,jdbcType=VARCHAR},
+            #{updatetime,jdbcType=VARCHAR},
+            #{fromcity,jdbcType=VARCHAR}, #{tocity,jdbcType=VARCHAR}, #{ftype,jdbcType=CHAR},
+            #{companyid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective"
+    parameterType="com.sutpc.data.aviation.rta.utilize.entity.FlightInfo">
+    insert into t_base_flightinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="flightno != null">
+        flightno,
+      </if>
+      <if test="deptime != null">
+        deptime,
+      </if>
+      <if test="arrtime != null">
+        arrtime,
+      </if>
+      <if test="fstatus != null">
+        fstatus,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="isdelete != null">
+        isdelete,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="fromcity != null">
+        fromcity,
+      </if>
+      <if test="tocity != null">
+        tocity,
+      </if>
+      <if test="ftype != null">
+        ftype,
+      </if>
+      <if test="companyid != null">
+        companyid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="flightno != null">
+        #{flightno,jdbcType=VARCHAR},
+      </if>
+      <if test="deptime != null">
+        #{deptime,jdbcType=VARCHAR},
+      </if>
+      <if test="arrtime != null">
+        #{arrtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fstatus != null">
+        #{fstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null">
+        #{isdelete,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="fromcity != null">
+        #{fromcity,jdbcType=VARCHAR},
+      </if>
+      <if test="tocity != null">
+        #{tocity,jdbcType=VARCHAR},
+      </if>
+      <if test="ftype != null">
+        #{ftype,jdbcType=CHAR},
+      </if>
+      <if test="companyid != null">
+        #{companyid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 批量插入 -->
+  <insert id="insertBatch">
+    <foreach collection="list" item="it" index="index" open="" close="" separator=";">
+      insert into t_base_flightinfo
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="it.id != null">
+          id,
+        </if>
+        <if test="it.flightno != null">
+          flightno,
+        </if>
+        <if test="it.deptime != null">
+          deptime,
+        </if>
+        <if test="it.arrtime != null">
+          arrtime,
+        </if>
+        <if test="it.fstatus != null">
+          fstatus,
+        </if>
+        <if test="it.remark != null">
+          remark,
+        </if>
+        <if test="it.isdelete != null">
+          isdelete,
+        </if>
+        <if test="it.createtime != null">
+          createtime,
+        </if>
+        <if test="it.updatetime != null">
+          updatetime,
+        </if>
+        <if test="it.fromcity != null">
+          fromcity,
+        </if>
+        <if test="it.tocity != null">
+          tocity,
+        </if>
+        <if test="it.ftype != null">
+          ftype,
+        </if>
+        <if test="it.companyid != null">
+          companyid,
+        </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="it.id != null">
+          #{it.id,jdbcType=VARCHAR},
+        </if>
+        <if test="it.flightno != null">
+          #{it.flightno,jdbcType=VARCHAR},
+        </if>
+        <if test="it.deptime != null">
+          #{it.deptime,jdbcType=VARCHAR},
+        </if>
+        <if test="it.arrtime != null">
+          #{it.arrtime,jdbcType=VARCHAR},
+        </if>
+        <if test="it.fstatus != null">
+          #{it.fstatus,jdbcType=VARCHAR},
+        </if>
+        <if test="it.remark != null">
+          #{it.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="it.isdelete != null">
+          #{it.isdelete,jdbcType=CHAR},
+        </if>
+        <if test="it.createtime != null">
+          #{it.createtime,jdbcType=VARCHAR},
+        </if>
+        <if test="it.updatetime != null">
+          #{it.updatetime,jdbcType=VARCHAR},
+        </if>
+        <if test="it.fromcity != null">
+          #{it.fromcity,jdbcType=VARCHAR},
+        </if>
+        <if test="it.tocity != null">
+          #{it.tocity,jdbcType=VARCHAR},
+        </if>
+        <if test="it.ftype != null">
+          #{it.ftype,jdbcType=CHAR},
+        </if>
+        <if test="it.companyid != null">
+          #{it.companyid,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective"
+    parameterType="com.sutpc.data.aviation.rta.utilize.entity.FlightInfo">
+    update t_base_flightinfo
+    <set>
+      <if test="flightno != null">
+        flightno = #{flightno,jdbcType=VARCHAR},
+      </if>
+      <if test="deptime != null">
+        deptime = #{deptime,jdbcType=VARCHAR},
+      </if>
+      <if test="arrtime != null">
+        arrtime = #{arrtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fstatus != null">
+        fstatus = #{fstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isdelete != null">
+        isdelete = #{isdelete,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="fromcity != null">
+        fromcity = #{fromcity,jdbcType=VARCHAR},
+      </if>
+      <if test="tocity != null">
+        tocity = #{tocity,jdbcType=VARCHAR},
+      </if>
+      <if test="ftype != null">
+        ftype = #{ftype,jdbcType=CHAR},
+      </if>
+      <if test="companyid != null">
+        companyid = #{companyid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <!--  批量更新 -->
+  <update id="updateBatch">
+    <foreach collection="list" item="it" index="index" open="" close="" separator=";">
+      update t_base_flightinfo
+      <set>
+        <if test="it.flightno != null">
+          flightno = #{it.flightno,jdbcType=VARCHAR},
+        </if>
+        <if test="it.deptime != null">
+          deptime = #{it.deptime,jdbcType=VARCHAR},
+        </if>
+        <if test="it.arrtime != null">
+          arrtime = #{it.arrtime,jdbcType=VARCHAR},
+        </if>
+        <if test="it.fstatus != null">
+          fstatus = #{it.fstatus,jdbcType=VARCHAR},
+        </if>
+        <if test="it.remark != null">
+          remark = #{it.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="it.isdelete != null">
+          isdelete = #{it.isdelete,jdbcType=CHAR},
+        </if>
+        <if test="it.createtime != null">
+          createtime = #{it.createtime,jdbcType=VARCHAR},
+        </if>
+        <if test="it.updatetime != null">
+          updatetime = #{it.updatetime,jdbcType=VARCHAR},
+        </if>
+        <if test="it.fromcity != null">
+          fromcity = #{it.fromcity,jdbcType=VARCHAR},
+        </if>
+        <if test="it.tocity != null">
+          tocity = #{it.tocity,jdbcType=VARCHAR},
+        </if>
+        <if test="it.ftype != null">
+          ftype = #{it.ftype,jdbcType=CHAR},
+        </if>
+        <if test="it.companyid != null">
+          companyid = #{it.companyid,jdbcType=VARCHAR},
+        </if>
+      </set>
+      where id = #{it.id,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+
+  <update id="updateByPrimaryKey"
+    parameterType="com.sutpc.data.aviation.rta.utilize.entity.FlightInfo">
+    update t_base_flightinfo
+    set flightno   = #{flightno,jdbcType=VARCHAR},
+        deptime    = #{deptime,jdbcType=VARCHAR},
+        arrtime    = #{arrtime,jdbcType=VARCHAR},
+        fstatus    = #{fstatus,jdbcType=VARCHAR},
+        remark     = #{remark,jdbcType=VARCHAR},
+        isdelete   = #{isdelete,jdbcType=CHAR},
+        createtime = #{createtime,jdbcType=VARCHAR},
+        updatetime = #{updatetime,jdbcType=VARCHAR},
+        fromcity   = #{fromcity,jdbcType=VARCHAR},
+        tocity     = #{tocity,jdbcType=VARCHAR},
+        ftype      = #{ftype,jdbcType=CHAR},
+        companyid  = #{companyid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateDeleteStatus">
+    <foreach collection="ids" item="id" index="index" open="" close="" separator=";">
+      UPDATE t_base_flightinfo set isdelete=1 where id != #{id,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+</mapper>

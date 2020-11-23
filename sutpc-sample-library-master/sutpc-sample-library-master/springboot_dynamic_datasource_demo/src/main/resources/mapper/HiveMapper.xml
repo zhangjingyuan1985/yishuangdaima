@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.dao.IHiveDao">
+
+
+	
+	<select id="findObjects"  resultType="map" >
+		
+		select fname from t_common_base_air_station
+			
+	</select>
+	
+	<select id="findDataBases"  resultType="map" >
+		
+		show databases
+			
+	</select>
+	<select id="findTableDesc"  resultType="map" >
+		
+		desc ${tableName}
+			
+	</select>
+
+
+	<insert id="batchInsert" >
+		${sql}
+	</insert>
+	
+	
+	<insert id="saveObject" >
+		insert into t_test(f1)
+		 values(#{f})
+	</insert>
+	
+	<insert id="createTable" parameterType="map">
+		create table if not exists ${tableName}(
+		    f1 string
+		) comment 'test for batch insert'
+		
+	</insert>
+	
+	
+
+	
+</mapper>

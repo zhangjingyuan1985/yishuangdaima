@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.sutpc.data</groupId>
+		<artifactId>sutpc-data-converge</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<groupId>com.sutpc.data.util</groupId>
+	<artifactId>sutpc-data-util-converge</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>sutpc-data-util-converge</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>sutpc-data-util-kafka-producer</module>
+		<module>sutpc-data-util-kafka-consumer</module>
+		<module>sutpc-data-util-http-client</module>
+		<module>sutpc-data-util-ftp-client</module>
+		<module>sutpc-data-util-kafka-huawei</module>
+	</modules>
+</project>

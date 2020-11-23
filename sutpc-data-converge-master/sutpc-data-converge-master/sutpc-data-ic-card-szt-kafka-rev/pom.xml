@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.15.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+  <groupId>com.sutpc</groupId>
+  <artifactId>sutpc-data-ic-card-szt-kafka-rev</artifactId>
+  <version>1.0.0</version>
+  <name>sutpc-data-ic-card-szt-kafka-rev</name>
+  <description>Demo project for Spring Boot</description>
+
+  <properties>
+    <java.version>1.8</java.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.kafka</groupId>
+      <artifactId>kafka-clients-0.11.0.1</artifactId>
+      <version>0.11.0.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/lib/kafka-clients-0.11.0.1.jar</systemPath>
+    </dependency>
+
+    <!--mvn install:install-file -Dfile=${basedir}\lib\kafka-clients-0.11.0.1.jar -DgroupId=kafka-clients -DartifactId=kafka-clients -Dversion=0.11.0.1 -Dpackaging=jar-->
+<!--    <dependency>-->
+<!--      <groupId>kafka-clients</groupId>-->
+<!--      <artifactId>kafka-clients</artifactId>-->
+<!--      <version>0.11.0.1</version>-->
+<!--    </dependency>-->
+
+    <dependency>
+      <groupId>com.sutpc</groupId>
+      <artifactId>framework-utils</artifactId>
+      <version>2.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.expressway.microwave.rta.mapper.TSeReportMapper">
+    <resultMap id="BaseResultMap" type="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeReport">
+        <id column="PERIOD" jdbcType="DATE" property="period"/>
+        <id column="INTERSECTIONCODE" jdbcType="VARCHAR" property="intersectioncode"/>
+        <id column="DATETYPE" jdbcType="BIGINT" property="datetype"/>
+        <result column="AVGSPEED" jdbcType="DOUBLE" property="avgspeed"/>
+        <result column="FLOW" jdbcType="DOUBLE" property="flow"/>
+        <result column="PCU" jdbcType="DOUBLE" property="pcu"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        PERIOD, INTERSECTIONCODE, DATETYPE, AVGSPEED, FLOW, PCU
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeReportKey"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_se_report
+        where PERIOD = #{period,jdbcType=DATE}
+        and INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+        and DATETYPE = #{datetype,jdbcType=BIGINT}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from HIGHWAY.T_SE_REPORT
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeReportKey">
+        delete
+        from t_se_report
+        where PERIOD = #{period,jdbcType=DATE}
+          and INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+          and DATETYPE = #{datetype,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeReport">
+        insert into t_se_report (PERIOD, INTERSECTIONCODE, DATETYPE,
+                                 AVGSPEED, FLOW, PCU)
+        values (#{period,jdbcType=DATE}, #{intersectioncode,jdbcType=VARCHAR}, #{datetype,jdbcType=BIGINT},
+                #{avgspeed,jdbcType=DOUBLE}, #{flow,jdbcType=DOUBLE}, #{pcu,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeReport">
+        insert into t_se_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="period != null">
+                PERIOD,
+            </if>
+            <if test="intersectioncode != null">
+                INTERSECTIONCODE,
+            </if>
+            <if test="datetype != null">
+                DATETYPE,
+            </if>
+            <if test="avgspeed != null">
+                AVGSPEED,
+            </if>
+            <if test="flow != null">
+                FLOW,
+            </if>
+            <if test="pcu != null">
+                PCU,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="period != null">
+                #{period,jdbcType=DATE},
+            </if>
+            <if test="intersectioncode != null">
+                #{intersectioncode,jdbcType=VARCHAR},
+            </if>
+            <if test="datetype != null">
+                #{datetype,jdbcType=BIGINT},
+            </if>
+            <if test="avgspeed != null">
+                #{avgspeed,jdbcType=DOUBLE},
+            </if>
+            <if test="flow != null">
+                #{flow,jdbcType=DOUBLE},
+            </if>
+            <if test="pcu != null">
+                #{pcu,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeReport">
+        update t_se_report
+        <set>
+            <if test="avgspeed != null">
+                AVGSPEED = #{avgspeed,jdbcType=DOUBLE},
+            </if>
+            <if test="flow != null">
+                FLOW = #{flow,jdbcType=DOUBLE},
+            </if>
+            <if test="pcu != null">
+                PCU = #{pcu,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where PERIOD = #{period,jdbcType=DATE}
+        and INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+        and DATETYPE = #{datetype,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TSeReport">
+        update t_se_report
+        set AVGSPEED = #{avgspeed,jdbcType=DOUBLE},
+            FLOW     = #{flow,jdbcType=DOUBLE},
+            PCU      = #{pcu,jdbcType=DOUBLE}
+        where PERIOD = #{period,jdbcType=DATE}
+          and INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+          and DATETYPE = #{datetype,jdbcType=BIGINT}
+    </update>
+</mapper>

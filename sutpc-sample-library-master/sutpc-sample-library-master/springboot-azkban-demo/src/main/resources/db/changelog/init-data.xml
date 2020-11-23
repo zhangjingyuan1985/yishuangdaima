@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+  <!-- 在运行spring app时，若spring.profiles.active中增加了load，则会对下面几个表数据进行初始化， -->
+  <!-- 运行load时，要求在app.jar的同级目录下增加load文件夹，且load里面包含几个从psql导出的csv文件 -->
+  <changeSet author="huying" id="增加初始化数据，context与spring profile对应" context="load">
+<!--    <loadUpdateData-->
+<!--      file="file:/app/load/tree_node.csv"-->
+<!--      separator="," tableName="tree_node" primaryKey="id"/>-->
+<!--    <loadUpdateData-->
+<!--      file="file:/app/load/index_info.csv"-->
+<!--      separator="," tableName="index_info" primaryKey="id"/>-->
+<!--    <loadUpdateData-->
+<!--      file="file:/app/load/algorithm_info.csv"-->
+<!--      separator="," tableName="algorithm_info" primaryKey="id"/>-->
+<!--    <loadUpdateData-->
+<!--      file="file:/app/load/index_common_query.csv"-->
+<!--      separator="," tableName="index_common_query" primaryKey="id"/>-->
+<!--    <loadUpdateData-->
+<!--      file="file:/app/load/index_foreign_key.csv"-->
+<!--      separator="," tableName="index_foreign_key" primaryKey="id"/>-->
+<!--    <loadUpdateData-->
+<!--      file="file:/app/load/index_second_layer_description.csv"-->
+<!--      separator="," tableName="index_second_layer_description" primaryKey="id"/>-->
+  </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.phone.signaling.rta.mapper.TblPfSaturationMapper">
+    <resultMap id="BaseResultMap" type="com.sutpc.data.rev.phone.signaling.rta.entity.TblPfSaturation">
+        <id column="TAZID" jdbcType="BIGINT" property="tazid"/>
+        <result column="TIMESTAMP" jdbcType="DATE" property="timestamp"/>
+        <result column="TAZNAME" jdbcType="VARCHAR" property="tazname"/>
+        <result column="PF" jdbcType="BIGINT" property="pf"/>
+        <result column="PF_SATURATION" jdbcType="BIGINT" property="pfSaturation"/>
+        <result column="SERVICE_LEVEL" jdbcType="VARCHAR" property="serviceLevel"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        TAZID, TIMESTAMP, TAZNAME, PF, PF_SATURATION, SERVICE_LEVEL
+    </sql>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from MDPFWS_BIZ.TBL_PF_SATURATION
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tbl_pf_saturation
+        where TAZID = #{tazid,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from tbl_pf_saturation
+        where TAZID = #{tazid,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.sutpc.data.rev.phone.signaling.rta.entity.TblPfSaturation">
+        insert into tbl_pf_saturation (TAZID, TIMESTAMP, TAZNAME,
+                                       PF, PF_SATURATION, SERVICE_LEVEL)
+        values (#{tazid,jdbcType=BIGINT}, #{timestamp,jdbcType=DATE}, #{tazname,jdbcType=VARCHAR},
+                #{pf,jdbcType=BIGINT}, #{pfSaturation,jdbcType=BIGINT}, #{serviceLevel,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sutpc.data.rev.phone.signaling.rta.entity.TblPfSaturation">
+        insert into tbl_pf_saturation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tazid != null">
+                TAZID,
+            </if>
+            <if test="timestamp != null">
+                TIMESTAMP,
+            </if>
+            <if test="tazname != null">
+                TAZNAME,
+            </if>
+            <if test="pf != null">
+                PF,
+            </if>
+            <if test="pfSaturation != null">
+                PF_SATURATION,
+            </if>
+            <if test="serviceLevel != null">
+                SERVICE_LEVEL,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tazid != null">
+                #{tazid,jdbcType=BIGINT},
+            </if>
+            <if test="timestamp != null">
+                #{timestamp,jdbcType=DATE},
+            </if>
+            <if test="tazname != null">
+                #{tazname,jdbcType=VARCHAR},
+            </if>
+            <if test="pf != null">
+                #{pf,jdbcType=BIGINT},
+            </if>
+            <if test="pfSaturation != null">
+                #{pfSaturation,jdbcType=BIGINT},
+            </if>
+            <if test="serviceLevel != null">
+                #{serviceLevel,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sutpc.data.rev.phone.signaling.rta.entity.TblPfSaturation">
+        update tbl_pf_saturation
+        <set>
+            <if test="timestamp != null">
+                TIMESTAMP = #{timestamp,jdbcType=DATE},
+            </if>
+            <if test="tazname != null">
+                TAZNAME = #{tazname,jdbcType=VARCHAR},
+            </if>
+            <if test="pf != null">
+                PF = #{pf,jdbcType=BIGINT},
+            </if>
+            <if test="pfSaturation != null">
+                PF_SATURATION = #{pfSaturation,jdbcType=BIGINT},
+            </if>
+            <if test="serviceLevel != null">
+                SERVICE_LEVEL = #{serviceLevel,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where TAZID = #{tazid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sutpc.data.rev.phone.signaling.rta.entity.TblPfSaturation">
+        update tbl_pf_saturation
+        set TIMESTAMP     = #{timestamp,jdbcType=DATE},
+            TAZNAME       = #{tazname,jdbcType=VARCHAR},
+            PF            = #{pf,jdbcType=BIGINT},
+            PF_SATURATION = #{pfSaturation,jdbcType=BIGINT},
+            SERVICE_LEVEL = #{serviceLevel,jdbcType=VARCHAR}
+        where TAZID = #{tazid,jdbcType=BIGINT}
+    </update>
+</mapper>

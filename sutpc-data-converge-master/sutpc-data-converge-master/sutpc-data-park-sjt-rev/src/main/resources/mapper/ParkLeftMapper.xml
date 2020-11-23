@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.park.sjt.mapper.ParkLeftMapper">
+
+  <insert id="insert" parameterType="java.util.List">
+    insert into t_park_inroad_left_ms
+    (fdate, time_dim, period,inroad_park_fid, inroad_park_version, leftnum, saturation, source)
+    values
+    <foreach collection="parks" item="park" index="index" separator=",">
+      (#{park.date}, #{park.timeDim},#{park.period},#{park.fid}, #{park.version}, #{park.leftNum},
+      #{park.saturation}, #{park.source})
+    </foreach>
+  </insert>
+</mapper>

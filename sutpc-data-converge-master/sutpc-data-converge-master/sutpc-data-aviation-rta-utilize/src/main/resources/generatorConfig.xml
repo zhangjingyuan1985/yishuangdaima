@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- Reference: http://www.mybatis.org/generator/index.html -->
+<generatorConfiguration>
+    <context id="MySQLTables" targetRuntime="MyBatis3">
+    
+        <!--===============-->
+        <!-- 生成共通属性配置 -->
+        <!--===============-->
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!--===============-->
+        <!-- MySQL数据源配置 -->
+        <!--===============-->
+        <jdbcConnection driverClass="org.postgresql.Driver"
+            connectionURL="jdbc:postgresql://10.10.2.147:5432/postgres"
+            userId="postgres" password="sutpckczx" />
+
+        <javaModelGenerator targetPackage="com.sutpc.data.aviation.rta.utilize.entity"
+            targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper"
+            targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.sutpc.data.aviation.rta.utilize.dao"
+            targetProject="./src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--===============-->
+        <!-- 生成的业务表配置 -->
+        <!--===============-->
+<!--        <table tableName="t_base_flightinfo" domainObjectName="FlightInfo"-->
+<!--            enableCountByExample="false" enableUpdateByExample="false"-->
+<!--            enableDeleteByExample="false" enableSelectByExample="false"-->
+<!--            selectByExampleQueryId="false" >  -->
+        <table tableName="t_base_flightcompany" domainObjectName="FlightCompany"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false" >
+              <!--
+            <property name="useActualColumnNames" value="true" />
+            <columnOverride column="isAdmin" property="admin" javaType="java.lang.Boolean" typeHandler="com.neusoft.inkstone.framework.infras.data.mybatis.BooleanTypeHandler" />
+            <columnOverride column="isOnJob" property="onJob" javaType="java.lang.Boolean" typeHandler="com.neusoft.inkstone.framework.infras.data.mybatis.BooleanTypeHandler" />
+            <columnOverride column="isDeleted" property="deleted" javaType="java.lang.Boolean" typeHandler="com.neusoft.inkstone.framework.infras.data.mybatis.BooleanTypeHandler" />
+            <columnOverride column="isUuasSync" property="uuasSync" javaType="java.lang.Boolean" typeHandler="com.neusoft.inkstone.framework.infras.data.mybatis.BooleanTypeHandler" />
+          -->
+        </table>
+
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -e
+. "$BAGCLI_WORKDIR/common"
+
+cli_help_up() {
+  echo "
+Command: up
+
+Usage: 
+  up project_name [dump_backup_file]"
+  exit 1
+}
+
+[ ! -n "$1" ] && cli_help_up
+
+#export BAGCLI_DUMP_BACKUP=$2
+
+export BAGCLI_PROJECT_NAME=$1
+
+cli_log "Up BEGIN"
+
+cli_log "ENV variables"
+env | grep "BAGCLI_*"
+
+cli_log "Executing docker-compose up ..."
+docker network create transpaas-network || true
+docker-compose -f $BAGCLI_PROJECTS_PATH/$BAGCLI_PROJECT_NAME/docker-compose.yml up -d
+
+#if [[ -z $BAGCLI_DUMP_BACKUP ]]; then
+
+  cli_log "Executing docker-compose kill ..."
+  docker-compose -f $BAGCLI_PROJECTS_PATH/$BAGCLI_PROJECT_NAME/docker-compose.yml kill transpaas-view transpaas-api zuul sysman
+
+  cli_log "Executing docker exec ..."
+  cat $BAGCLI_DUMP_BACKUP | docker exec -i ${COMPOSE_PROJECT_NAME}_database_1 psql -U postgres
+
+  cli_log "Executing docker-compose start ..."
+  docker-compose -f $BAGCLI_PROJECTS_PATH/$BAGCLI_PROJECT_NAME/docker-compose.yml start transpaas-view transpaas-api zuul sysman
+
+#fi
+
+cli_log "*** Up successfully ***"

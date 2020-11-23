@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -e
+export BAGCLI_WORKDIR=$(cd $(dirname $0) && pwd)
+# shellcheck source=common
+. "$BAGCLI_WORKDIR/common"
+
+cli_help() {
+  cli_name=${0##*/}
+  echo "
+$cli_name
+Brot and Games CLI
+Version: $(cat $BAGCLI_WORKDIR/VERSION)
+https://github.com/brotandgames/bagcli
+
+Usage: $cli_name [command]
+
+Commands:
+  up        Start
+  down      Down
+  *         Help
+"
+  exit 1
+}
+
+cli_log "Exporting env ..."
+[ ! -f "$BAGCLI_WORKDIR/.env" ] \
+  && echo "ERROR: No $BAGCLI_WORKDIR/.env file found. " \
+  && echo "cp $BAGCLI_WORKDIR/env.template $BAGCLI_WORKDIR/.env and adjust." \
+  && exit 1
+
+export $(cat "$BAGCLI_WORKDIR/.env" | xargs)
+
+case "$1" in
+  up|u)
+    "$BAGCLI_WORKDIR/commands/up" "$2" | tee -ia "$BAGCLI_WORKDIR/logs/up.log"
+    ;;
+  down|d)
+    "$BAGCLI_WORKDIR/commands/down" "$2" | tee -ia "$BAGCLI_WORKDIR/logs/down.log"
+    ;;
+  *)
+    cli_help
+    ;;
+esac

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.expressway.microwave.rta.mapper.TIntersectionMapper">
+    <resultMap id="BaseResultMap" type="com.sutpc.data.rev.expressway.microwave.rta.entity.TIntersection">
+        <id column="INTERSECTIONCODE" jdbcType="VARCHAR" property="intersectioncode"/>
+        <result column="CHILDAREACODE" jdbcType="VARCHAR" property="childareacode"/>
+        <result column="HIGHWAY_ID" jdbcType="VARCHAR" property="highwayId"/>
+        <result column="STATION_NAME" jdbcType="VARCHAR" property="stationName"/>
+        <result column="INTERSECTIONNAME" jdbcType="VARCHAR" property="intersectionname"/>
+        <result column="INTERSECTIONTYPE" jdbcType="VARCHAR" property="intersectiontype"/>
+        <result column="MONITOR_ID" jdbcType="VARCHAR" property="monitorId"/>
+        <result column="STATION_ID" jdbcType="VARCHAR" property="stationId"/>
+        <result column="HIGHWAY_NAME" jdbcType="VARCHAR" property="highwayName"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.sutpc.data.rev.expressway.microwave.rta.entity.TIntersection">
+        <result column="INTERSECTIONMAP" jdbcType="LONGVARBINARY" property="intersectionmap"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        INTERSECTIONCODE, CHILDAREACODE, HIGHWAY_ID, STATION_NAME, INTERSECTIONNAME, INTERSECTIONTYPE,
+    MONITOR_ID, STATION_ID,HIGHWAY_NAME
+    </sql>
+    <sql id="Blob_Column_List">
+        INTERSECTIONMAP
+    </sql>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from ST.T_INTERSECTION
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from t_intersection
+        where INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from t_intersection
+        where INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TIntersection">
+        insert into t_intersection (INTERSECTIONCODE, CHILDAREACODE,
+                                    HIGHWAY_ID, STATION_NAME, INTERSECTIONNAME,
+                                    INTERSECTIONTYPE, MONITOR_ID, STATION_ID,
+                                    INTERSECTIONMAP)
+        values (#{intersectioncode,jdbcType=VARCHAR}, #{childareacode,jdbcType=VARCHAR},
+                #{highwayId,jdbcType=VARCHAR}, #{stationName,jdbcType=VARCHAR}, #{intersectionname,jdbcType=VARCHAR},
+                #{intersectiontype,jdbcType=VARCHAR}, #{monitorId,jdbcType=VARCHAR}, #{stationId,jdbcType=VARCHAR},
+                #{intersectionmap,jdbcType=LONGVARBINARY})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TIntersection">
+        insert into t_intersection
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="intersectioncode != null">
+                INTERSECTIONCODE,
+            </if>
+            <if test="childareacode != null">
+                CHILDAREACODE,
+            </if>
+            <if test="highwayId != null">
+                HIGHWAY_ID,
+            </if>
+            <if test="stationName != null">
+                STATION_NAME,
+            </if>
+            <if test="intersectionname != null">
+                INTERSECTIONNAME,
+            </if>
+            <if test="intersectiontype != null">
+                INTERSECTIONTYPE,
+            </if>
+            <if test="monitorId != null">
+                MONITOR_ID,
+            </if>
+            <if test="stationId != null">
+                STATION_ID,
+            </if>
+            <if test="intersectionmap != null">
+                INTERSECTIONMAP,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="intersectioncode != null">
+                #{intersectioncode,jdbcType=VARCHAR},
+            </if>
+            <if test="childareacode != null">
+                #{childareacode,jdbcType=VARCHAR},
+            </if>
+            <if test="highwayId != null">
+                #{highwayId,jdbcType=VARCHAR},
+            </if>
+            <if test="stationName != null">
+                #{stationName,jdbcType=VARCHAR},
+            </if>
+            <if test="intersectionname != null">
+                #{intersectionname,jdbcType=VARCHAR},
+            </if>
+            <if test="intersectiontype != null">
+                #{intersectiontype,jdbcType=VARCHAR},
+            </if>
+            <if test="monitorId != null">
+                #{monitorId,jdbcType=VARCHAR},
+            </if>
+            <if test="stationId != null">
+                #{stationId,jdbcType=VARCHAR},
+            </if>
+            <if test="intersectionmap != null">
+                #{intersectionmap,jdbcType=LONGVARBINARY},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TIntersection">
+        update t_intersection
+        <set>
+            <if test="childareacode != null">
+                CHILDAREACODE = #{childareacode,jdbcType=VARCHAR},
+            </if>
+            <if test="highwayId != null">
+                HIGHWAY_ID = #{highwayId,jdbcType=VARCHAR},
+            </if>
+            <if test="stationName != null">
+                STATION_NAME = #{stationName,jdbcType=VARCHAR},
+            </if>
+            <if test="intersectionname != null">
+                INTERSECTIONNAME = #{intersectionname,jdbcType=VARCHAR},
+            </if>
+            <if test="intersectiontype != null">
+                INTERSECTIONTYPE = #{intersectiontype,jdbcType=VARCHAR},
+            </if>
+            <if test="monitorId != null">
+                MONITOR_ID = #{monitorId,jdbcType=VARCHAR},
+            </if>
+            <if test="stationId != null">
+                STATION_ID = #{stationId,jdbcType=VARCHAR},
+            </if>
+            <if test="intersectionmap != null">
+                INTERSECTIONMAP = #{intersectionmap,jdbcType=LONGVARBINARY},
+            </if>
+        </set>
+        where INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBlobs" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TIntersection">
+        update t_intersection
+        set CHILDAREACODE    = #{childareacode,jdbcType=VARCHAR},
+            HIGHWAY_ID       = #{highwayId,jdbcType=VARCHAR},
+            STATION_NAME     = #{stationName,jdbcType=VARCHAR},
+            INTERSECTIONNAME = #{intersectionname,jdbcType=VARCHAR},
+            INTERSECTIONTYPE = #{intersectiontype,jdbcType=VARCHAR},
+            MONITOR_ID       = #{monitorId,jdbcType=VARCHAR},
+            STATION_ID       = #{stationId,jdbcType=VARCHAR},
+            INTERSECTIONMAP  = #{intersectionmap,jdbcType=LONGVARBINARY}
+        where INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TIntersection">
+        update t_intersection
+        set CHILDAREACODE    = #{childareacode,jdbcType=VARCHAR},
+            HIGHWAY_ID       = #{highwayId,jdbcType=VARCHAR},
+            STATION_NAME     = #{stationName,jdbcType=VARCHAR},
+            INTERSECTIONNAME = #{intersectionname,jdbcType=VARCHAR},
+            INTERSECTIONTYPE = #{intersectiontype,jdbcType=VARCHAR},
+            MONITOR_ID       = #{monitorId,jdbcType=VARCHAR},
+            STATION_ID       = #{stationId,jdbcType=VARCHAR}
+        where INTERSECTIONCODE = #{intersectioncode,jdbcType=VARCHAR}
+    </update>
+</mapper>

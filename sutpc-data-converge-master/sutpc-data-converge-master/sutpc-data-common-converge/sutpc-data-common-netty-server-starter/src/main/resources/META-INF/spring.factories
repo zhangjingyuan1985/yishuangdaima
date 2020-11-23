@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.sutpc.data.netty.server.starter.config.NettyServerAutoConfiguration
+#com.sutpc.data.netty.server.starter.config.NettyServerAutoConfiguration

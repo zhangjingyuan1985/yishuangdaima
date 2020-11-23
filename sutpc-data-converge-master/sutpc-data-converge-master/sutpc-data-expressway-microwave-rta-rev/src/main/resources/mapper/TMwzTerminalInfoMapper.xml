@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.expressway.microwave.rta.mapper.TMwzTerminalInfoMapper">
+    <resultMap id="BaseResultMap" type="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwzTerminalInfo">
+        <id column="TERMINALID" jdbcType="BIGINT" property="terminalid"/>
+        <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
+        <result column="FREESPEED" jdbcType="BIGINT" property="freespeed"/>
+        <result column="LIMITSPEED" jdbcType="BIGINT" property="limitspeed"/>
+        <result column="LONLAT" jdbcType="VARCHAR" property="lonlat"/>
+        <result column="SHOWNAME" jdbcType="VARCHAR" property="showname"/>
+        <result column="TERMINALNAME" jdbcType="VARCHAR" property="terminalname"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        TERMINALID, CREATETIME, DESCRIPTION, FREESPEED, LIMITSPEED, LONLAT, SHOWNAME, TERMINALNAME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_mw_terminal_info
+        where TERMINALID = #{terminalid,jdbcType=BIGINT}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from HIGHWAY.T_MW_TERMINAL_INFO
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from t_mw_terminal_info
+        where TERMINALID = #{terminalid,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwzTerminalInfo">
+        insert into t_mw_terminal_info (TERMINALID, CREATETIME, DESCRIPTION,
+                                        FREESPEED, LIMITSPEED, LONLAT,
+                                        SHOWNAME, TERMINALNAME)
+        values (#{terminalid,jdbcType=BIGINT}, #{createtime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR},
+                #{freespeed,jdbcType=BIGINT}, #{limitspeed,jdbcType=BIGINT}, #{lonlat,jdbcType=VARCHAR},
+                #{showname,jdbcType=VARCHAR}, #{terminalname,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwzTerminalInfo">
+        insert into t_mw_terminal_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="terminalid != null">
+                TERMINALID,
+            </if>
+            <if test="createtime != null">
+                CREATETIME,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="freespeed != null">
+                FREESPEED,
+            </if>
+            <if test="limitspeed != null">
+                LIMITSPEED,
+            </if>
+            <if test="lonlat != null">
+                LONLAT,
+            </if>
+            <if test="showname != null">
+                SHOWNAME,
+            </if>
+            <if test="terminalname != null">
+                TERMINALNAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="terminalid != null">
+                #{terminalid,jdbcType=BIGINT},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="freespeed != null">
+                #{freespeed,jdbcType=BIGINT},
+            </if>
+            <if test="limitspeed != null">
+                #{limitspeed,jdbcType=BIGINT},
+            </if>
+            <if test="lonlat != null">
+                #{lonlat,jdbcType=VARCHAR},
+            </if>
+            <if test="showname != null">
+                #{showname,jdbcType=VARCHAR},
+            </if>
+            <if test="terminalname != null">
+                #{terminalname,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwzTerminalInfo">
+        update t_mw_terminal_info
+        <set>
+            <if test="createtime != null">
+                CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="freespeed != null">
+                FREESPEED = #{freespeed,jdbcType=BIGINT},
+            </if>
+            <if test="limitspeed != null">
+                LIMITSPEED = #{limitspeed,jdbcType=BIGINT},
+            </if>
+            <if test="lonlat != null">
+                LONLAT = #{lonlat,jdbcType=VARCHAR},
+            </if>
+            <if test="showname != null">
+                SHOWNAME = #{showname,jdbcType=VARCHAR},
+            </if>
+            <if test="terminalname != null">
+                TERMINALNAME = #{terminalname,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where TERMINALID = #{terminalid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwzTerminalInfo">
+        update t_mw_terminal_info
+        set CREATETIME   = #{createtime,jdbcType=TIMESTAMP},
+            DESCRIPTION  = #{description,jdbcType=VARCHAR},
+            FREESPEED    = #{freespeed,jdbcType=BIGINT},
+            LIMITSPEED   = #{limitspeed,jdbcType=BIGINT},
+            LONLAT       = #{lonlat,jdbcType=VARCHAR},
+            SHOWNAME     = #{showname,jdbcType=VARCHAR},
+            TERMINALNAME = #{terminalname,jdbcType=VARCHAR}
+        where TERMINALID = #{terminalid,jdbcType=BIGINT}
+    </update>
+</mapper>

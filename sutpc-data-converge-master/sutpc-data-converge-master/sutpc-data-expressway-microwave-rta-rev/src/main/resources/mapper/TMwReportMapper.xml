@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.expressway.microwave.rta.mapper.TMwReportMapper">
+    <resultMap id="BaseResultMap" type="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwReport">
+        <id column="DATETYPE" jdbcType="BIGINT" property="datetype"/>
+        <result column="AVGSPEED" jdbcType="BIGINT" property="avgspeed"/>
+        <result column="DIRECTION" jdbcType="BIGINT" property="direction"/>
+        <result column="FLOW" jdbcType="BIGINT" property="flow"/>
+        <result column="PCU" jdbcType="BIGINT" property="pcu"/>
+        <result column="PERIOD" jdbcType="TIMESTAMP" property="period"/>
+        <result column="TERMINALID" jdbcType="BIGINT" property="terminalid"/>
+        <result column="TYPE1AVGSPEED" jdbcType="BIGINT" property="type1avgspeed"/>
+        <result column="TYPE1PCU" jdbcType="BIGINT" property="type1pcu"/>
+        <result column="TYPE2AVGSPEED" jdbcType="BIGINT" property="type2avgspeed"/>
+        <result column="TYPE2PCU" jdbcType="BIGINT" property="type2pcu"/>
+        <result column="TYPE3AVGSPEED" jdbcType="BIGINT" property="type3avgspeed"/>
+        <result column="TYPE3PCU" jdbcType="BIGINT" property="type3pcu"/>
+        <result column="TYPE4AVGSPEED" jdbcType="BIGINT" property="type4avgspeed"/>
+        <result column="TYPE4PCU" jdbcType="BIGINT" property="type4pcu"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        DATETYPE, AVGSPEED, DIRECTION, FLOW, PCU, PERIOD, TERMINALID, TYPE1AVGSPEED, TYPE1PCU,
+    TYPE2AVGSPEED, TYPE2PCU, TYPE3AVGSPEED, TYPE3PCU, TYPE4AVGSPEED, TYPE4PCU
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_mw_report
+        where DATETYPE = #{datetype,jdbcType=BIGINT}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from HIGHWAY.T_MW_REPORT
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from t_mw_report
+        where DATETYPE = #{datetype,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwReport">
+        insert into t_mw_report (DATETYPE, AVGSPEED, DIRECTION,
+                                 FLOW, PCU, PERIOD,
+                                 TERMINALID, TYPE1AVGSPEED, TYPE1PCU,
+                                 TYPE2AVGSPEED, TYPE2PCU, TYPE3AVGSPEED,
+                                 TYPE3PCU, TYPE4AVGSPEED, TYPE4PCU)
+        values (#{datetype,jdbcType=BIGINT}, #{avgspeed,jdbcType=BIGINT}, #{direction,jdbcType=BIGINT},
+                #{flow,jdbcType=BIGINT}, #{pcu,jdbcType=BIGINT}, #{period,jdbcType=TIMESTAMP},
+                #{terminalid,jdbcType=BIGINT}, #{type1avgspeed,jdbcType=BIGINT}, #{type1pcu,jdbcType=BIGINT},
+                #{type2avgspeed,jdbcType=BIGINT}, #{type2pcu,jdbcType=BIGINT}, #{type3avgspeed,jdbcType=BIGINT},
+                #{type3pcu,jdbcType=BIGINT}, #{type4avgspeed,jdbcType=BIGINT}, #{type4pcu,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwReport">
+        insert into t_mw_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="datetype != null">
+                DATETYPE,
+            </if>
+            <if test="avgspeed != null">
+                AVGSPEED,
+            </if>
+            <if test="direction != null">
+                DIRECTION,
+            </if>
+            <if test="flow != null">
+                FLOW,
+            </if>
+            <if test="pcu != null">
+                PCU,
+            </if>
+            <if test="period != null">
+                PERIOD,
+            </if>
+            <if test="terminalid != null">
+                TERMINALID,
+            </if>
+            <if test="type1avgspeed != null">
+                TYPE1AVGSPEED,
+            </if>
+            <if test="type1pcu != null">
+                TYPE1PCU,
+            </if>
+            <if test="type2avgspeed != null">
+                TYPE2AVGSPEED,
+            </if>
+            <if test="type2pcu != null">
+                TYPE2PCU,
+            </if>
+            <if test="type3avgspeed != null">
+                TYPE3AVGSPEED,
+            </if>
+            <if test="type3pcu != null">
+                TYPE3PCU,
+            </if>
+            <if test="type4avgspeed != null">
+                TYPE4AVGSPEED,
+            </if>
+            <if test="type4pcu != null">
+                TYPE4PCU,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="datetype != null">
+                #{datetype,jdbcType=BIGINT},
+            </if>
+            <if test="avgspeed != null">
+                #{avgspeed,jdbcType=BIGINT},
+            </if>
+            <if test="direction != null">
+                #{direction,jdbcType=BIGINT},
+            </if>
+            <if test="flow != null">
+                #{flow,jdbcType=BIGINT},
+            </if>
+            <if test="pcu != null">
+                #{pcu,jdbcType=BIGINT},
+            </if>
+            <if test="period != null">
+                #{period,jdbcType=TIMESTAMP},
+            </if>
+            <if test="terminalid != null">
+                #{terminalid,jdbcType=BIGINT},
+            </if>
+            <if test="type1avgspeed != null">
+                #{type1avgspeed,jdbcType=BIGINT},
+            </if>
+            <if test="type1pcu != null">
+                #{type1pcu,jdbcType=BIGINT},
+            </if>
+            <if test="type2avgspeed != null">
+                #{type2avgspeed,jdbcType=BIGINT},
+            </if>
+            <if test="type2pcu != null">
+                #{type2pcu,jdbcType=BIGINT},
+            </if>
+            <if test="type3avgspeed != null">
+                #{type3avgspeed,jdbcType=BIGINT},
+            </if>
+            <if test="type3pcu != null">
+                #{type3pcu,jdbcType=BIGINT},
+            </if>
+            <if test="type4avgspeed != null">
+                #{type4avgspeed,jdbcType=BIGINT},
+            </if>
+            <if test="type4pcu != null">
+                #{type4pcu,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwReport">
+        update t_mw_report
+        <set>
+            <if test="avgspeed != null">
+                AVGSPEED = #{avgspeed,jdbcType=BIGINT},
+            </if>
+            <if test="direction != null">
+                DIRECTION = #{direction,jdbcType=BIGINT},
+            </if>
+            <if test="flow != null">
+                FLOW = #{flow,jdbcType=BIGINT},
+            </if>
+            <if test="pcu != null">
+                PCU = #{pcu,jdbcType=BIGINT},
+            </if>
+            <if test="period != null">
+                PERIOD = #{period,jdbcType=TIMESTAMP},
+            </if>
+            <if test="terminalid != null">
+                TERMINALID = #{terminalid,jdbcType=BIGINT},
+            </if>
+            <if test="type1avgspeed != null">
+                TYPE1AVGSPEED = #{type1avgspeed,jdbcType=BIGINT},
+            </if>
+            <if test="type1pcu != null">
+                TYPE1PCU = #{type1pcu,jdbcType=BIGINT},
+            </if>
+            <if test="type2avgspeed != null">
+                TYPE2AVGSPEED = #{type2avgspeed,jdbcType=BIGINT},
+            </if>
+            <if test="type2pcu != null">
+                TYPE2PCU = #{type2pcu,jdbcType=BIGINT},
+            </if>
+            <if test="type3avgspeed != null">
+                TYPE3AVGSPEED = #{type3avgspeed,jdbcType=BIGINT},
+            </if>
+            <if test="type3pcu != null">
+                TYPE3PCU = #{type3pcu,jdbcType=BIGINT},
+            </if>
+            <if test="type4avgspeed != null">
+                TYPE4AVGSPEED = #{type4avgspeed,jdbcType=BIGINT},
+            </if>
+            <if test="type4pcu != null">
+                TYPE4PCU = #{type4pcu,jdbcType=BIGINT},
+            </if>
+        </set>
+        where DATETYPE = #{datetype,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwReport">
+        update t_mw_report
+        set AVGSPEED      = #{avgspeed,jdbcType=BIGINT},
+            DIRECTION     = #{direction,jdbcType=BIGINT},
+            FLOW          = #{flow,jdbcType=BIGINT},
+            PCU           = #{pcu,jdbcType=BIGINT},
+            PERIOD        = #{period,jdbcType=TIMESTAMP},
+            TERMINALID    = #{terminalid,jdbcType=BIGINT},
+            TYPE1AVGSPEED = #{type1avgspeed,jdbcType=BIGINT},
+            TYPE1PCU      = #{type1pcu,jdbcType=BIGINT},
+            TYPE2AVGSPEED = #{type2avgspeed,jdbcType=BIGINT},
+            TYPE2PCU      = #{type2pcu,jdbcType=BIGINT},
+            TYPE3AVGSPEED = #{type3avgspeed,jdbcType=BIGINT},
+            TYPE3PCU      = #{type3pcu,jdbcType=BIGINT},
+            TYPE4AVGSPEED = #{type4avgspeed,jdbcType=BIGINT},
+            TYPE4PCU      = #{type4pcu,jdbcType=BIGINT}
+        where DATETYPE = #{datetype,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.transport.rta.mapper.EventStatusMapper">
+
+  <insert id="insert" parameterType="java.util.List">
+    insert into t_event_report_status
+    (event_fid, status, update_time, finish_type, finish_time, finish_way, finish_remark, city)
+    values
+    <foreach collection="statuses" item="status" index="index" separator=",">
+      (#{status.eventFid}, #{status.status}, #{status.updateTime}, #{status.finishType},
+      #{status.finishTime}, #{status.finishWay}, #{status.finishRemark}, #{status.city})
+    </foreach>
+  </insert>
+</mapper>

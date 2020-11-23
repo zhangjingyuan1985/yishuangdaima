@@ -1,0 +1,3 @@
+CREATE DATABASE transpaas;
+CREATE DATABASE sysman;
+CREATE DATABASE zuul;

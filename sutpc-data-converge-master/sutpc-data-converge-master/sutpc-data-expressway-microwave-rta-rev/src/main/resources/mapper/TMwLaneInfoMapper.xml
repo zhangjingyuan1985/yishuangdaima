@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.expressway.microwave.rta.mapper.TMwLaneInfoMapper">
+    <resultMap id="BaseResultMap" type="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwLaneInfo">
+        <id column="TERMINALID" jdbcType="BIGINT" property="terminalid"/>
+        <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
+        <result column="DIRECTION" jdbcType="BIGINT" property="direction"/>
+        <result column="LANE" jdbcType="BIGINT" property="lane"/>
+        <result column="TERMINALNAME" jdbcType="VARCHAR" property="terminalname"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        TERMINALID, CREATETIME, DESCRIPTION, DIRECTION, LANE, TERMINALNAME
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_mw_lane_info
+        where TERMINALID = #{terminalid,jdbcType=BIGINT}
+    </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from HIGHWAY.T_MW_LANE_INFO
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from t_mw_lane_info
+        where TERMINALID = #{terminalid,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwLaneInfo">
+        insert into t_mw_lane_info (TERMINALID, CREATETIME, DESCRIPTION,
+                                    DIRECTION, LANE, TERMINALNAME)
+        values (#{terminalid,jdbcType=BIGINT}, #{createtime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR},
+                #{direction,jdbcType=BIGINT}, #{lane,jdbcType=BIGINT}, #{terminalname,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwLaneInfo">
+        insert into t_mw_lane_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="terminalid != null">
+                TERMINALID,
+            </if>
+            <if test="createtime != null">
+                CREATETIME,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="direction != null">
+                DIRECTION,
+            </if>
+            <if test="lane != null">
+                LANE,
+            </if>
+            <if test="terminalname != null">
+                TERMINALNAME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="terminalid != null">
+                #{terminalid,jdbcType=BIGINT},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null">
+                #{direction,jdbcType=BIGINT},
+            </if>
+            <if test="lane != null">
+                #{lane,jdbcType=BIGINT},
+            </if>
+            <if test="terminalname != null">
+                #{terminalname,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwLaneInfo">
+        update t_mw_lane_info
+        <set>
+            <if test="createtime != null">
+                CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null">
+                DIRECTION = #{direction,jdbcType=BIGINT},
+            </if>
+            <if test="lane != null">
+                LANE = #{lane,jdbcType=BIGINT},
+            </if>
+            <if test="terminalname != null">
+                TERMINALNAME = #{terminalname,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where TERMINALID = #{terminalid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sutpc.data.rev.expressway.microwave.rta.entity.TMwLaneInfo">
+        update t_mw_lane_info
+        set CREATETIME   = #{createtime,jdbcType=TIMESTAMP},
+            DESCRIPTION  = #{description,jdbcType=VARCHAR},
+            DIRECTION    = #{direction,jdbcType=BIGINT},
+            LANE         = #{lane,jdbcType=BIGINT},
+            TERMINALNAME = #{terminalname,jdbcType=VARCHAR}
+        where TERMINALID = #{terminalid,jdbcType=BIGINT}
+    </update>
+</mapper>

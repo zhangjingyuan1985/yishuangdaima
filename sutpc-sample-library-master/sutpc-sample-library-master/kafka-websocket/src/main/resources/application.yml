@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: kafka-websocket
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+  kafka:
+    consumer:
+      bootstrap-servers: 10.10.201.44:9092,10.10.201.45:9092,10.10.201.46:9092
+      group-id: sutpc-kafka-websocket-test
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      default-topic: TrafficFlow
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+# spring cloud access&secret config
+# 可以访问如下地址查看: https://usercenter.console.aliyun.com/#/manage/ak
+alibaba:
+  cloud:
+    access-key: hello
+    secret-key: world
+
+server:
+  port: 8080

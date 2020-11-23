@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sutpc.data.rev.transport.rta.mapper.EventPatrolMapper">
+
+  <insert id="insert" parameterType="java.util.List">
+    insert into t_event_report_patrol
+    (date, inspector, finish_time, start_time, distance, district_name, city)
+    values
+    <foreach collection="patrols" item="patrol" index="index" separator=",">
+      (#{patrol.date}, #{patrol.inspector}, #{patrol.finishTime}, #{patrol.startTime},
+      #{patrol.distance}, #{patrol.districtName}, #{patrol.city})
+    </foreach>
+  </insert>
+</mapper>

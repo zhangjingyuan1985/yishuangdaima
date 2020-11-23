@@ -1,0 +1,7 @@
+*.log
+.idea
+*.sql
+projects/*/volume_data/*
+!projects/*/script/initdb/init-dbs.sql
+.env
+

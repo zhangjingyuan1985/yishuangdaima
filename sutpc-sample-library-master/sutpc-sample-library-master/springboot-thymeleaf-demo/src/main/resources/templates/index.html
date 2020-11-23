@@ -1,0 +1,83 @@
+<!-- 页面动态展示 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery-1.7.1.js"></script>
+<body>
+name: <input type="text" placeholder="请输入" id="name"/><br/>
+mail: <input type="text" placeholder="请输入" id="mail"/><br/>
+<button type="button" onclick="successReq()">提交成功</button>
+<button type="button" onclick="errorReq()">提交失败</button>
+</body>
+
+<script>
+
+    function successReq(){
+
+        var name = $("#name").val();
+        var mail = $("#mail").val();
+
+        var adata = {
+            "mail" : mail,
+            "name" : name
+        };
+        var data = JSON.stringify(adata);
+        $.ajax({
+            type : "POST",
+            dataType: "json",//通过GET方式上传请求
+            contentType : "application/json",//上传内容格式为json结构
+            data : data,                                 //上传的参数
+            async: false ,
+            url : "demo/successReq",     //请求的url。与后端@Request Mapping注解中的值一致。
+            success : function(data) {          //请求成功的回调函数
+                if (data.code === '200'){
+                    alert("成功后 data 数据 结果返回 name：" + data.data.name + " mail: " + data.data.mail);
+                    window.location.href = "success";
+                } else {
+                    alert("请求失败 结果返回 name：" + data.msg);
+                    window.location.href = "error";
+                }
+            },
+            error : function(e) {           //请求失败的回调函数
+                console.log(e);
+            }
+        });
+    };
+
+    function errorReq(){
+
+        var name = $("#name").val();
+        var mail = $("#mail").val();
+
+        var adata = {
+            "mail" : mail,
+            "name" : name
+        };
+        var data = JSON.stringify(adata);
+        $.ajax({
+            type : "POST",
+            dataType: "json",//通过GET方式上传请求
+            contentType : "application/json",//上传内容格式为json结构
+            data : data,                                 //上传的参数
+            async: false ,
+            url : "demo/errorReq",     //请求的url。与后端@Request Mapping注解中的值一致。
+            success : function(data) {          //请求成功的回调函数
+                if (data.code === '200'){
+                    alert("成功后 结果返回 name：" + data.data.name + " mail: " + data.data.mail);
+                    window.location.href = "success";
+                } else {
+                    alert("请求失败 结果返回 name：" + data.msg);
+                    window.location.href = "error";
+                }
+            },
+            error : function(e) {           //请求失败的回调函数
+                console.log(e);
+            }
+        });
+    };
+</script>
+</html>
